@@ -1,5 +1,11 @@
-node_modules/
+*.local
+*.log
+.env
+.bsb.lock
+.merlin
 .DS_Store
+
+lib/
+node_modules/
 dist/
 dist-ssr/
-*.local

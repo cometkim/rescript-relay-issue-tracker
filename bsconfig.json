@@ -1,0 +1,34 @@
+{
+  "name": "rescript-relay-issut-tracker",
+  "reason": {
+    "react-jsx": 3
+  },
+  "refmt": 3,
+  "suffix": ".bs.js",
+  "sources": {
+    "dir" : "src",
+    "subdirs" : true
+  },
+  "bsc-flags": [
+    "-bs-super-errors",
+    "-bs-no-version-header"
+  ],
+  "package-specs": [
+    {
+      "module": "es6",
+      "in-source": true
+    }
+  ],
+  "ppx-flags": [
+    "rescript-relay/ppx"
+  ],
+  "bs-dependencies": [
+    "@rescript/react",
+    "rescript-relay",
+    "reason-promise",
+    "bs-fetch",
+    "bs-webapi"
+  ],
+  "bs-dev-dependencies": [
+  ]
+}
