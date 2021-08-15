@@ -7,7 +7,7 @@ function renderRootAtElementWithId(content, id) {
   if (element == null) {
     throw {
           RE_EXN_ID: "Invalid_argument",
-          _1: "ReactExperimental.renderConcurrentRootAtElementWithId : no element of id " + id + " found in the HTML.",
+          _1: "ReactDomExperimental.renderRootAtElementWithId: no element of id " + id + " found in the HTML.",
           Error: new Error()
         };
   }

@@ -3,7 +3,18 @@
 ReactDomExperimental.renderRootAtElementWithId(
   <React.StrictMode>
     <RescriptRelay.Context.Provider environment=RelayEnv.environment>
-      <App />
+      <RescriptRelayRouter.Provider value={Routes.routerContext}>
+        <RescriptRelayRouter.RouteRenderer
+          renderNotFound={_ => React.string("Page not found")}
+          renderFallback={() => React.string("Loading fallback...")}
+          renderPending={pending =>
+            switch pending {
+            | true =>
+              <div className="RouteRenderer-pending"> {React.string("Loading pending...")} </div>
+            | false => React.null
+            }}
+        />
+      </RescriptRelayRouter.Provider>
     </RescriptRelay.Context.Provider>
   </React.StrictMode>,
   "root",

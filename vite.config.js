@@ -3,5 +3,11 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [reactRefresh()]
-})
+  optimizeDeps: {
+    include: ['assert'],
+  },
+  define: {
+    'process.env.NODE_DEBUG': JSON.stringify(false),
+  },
+  plugins: [reactRefresh()],
+});

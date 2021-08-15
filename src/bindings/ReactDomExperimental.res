@@ -13,7 +13,7 @@ let renderRootAtElementWithId = (content, id) =>
   | None =>
     raise(
       Invalid_argument(
-        "ReactExperimental.renderConcurrentRootAtElementWithId : no element of id " ++
+        "ReactDomExperimental.renderRootAtElementWithId: no element of id " ++
         id ++ " found in the HTML.",
       ),
     )

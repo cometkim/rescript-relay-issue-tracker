@@ -1,1 +1,2 @@
-*.bs.js  linguist-generated
+*.bs.js              linguist-generated
+src/__generated__/*  linguist-generated
