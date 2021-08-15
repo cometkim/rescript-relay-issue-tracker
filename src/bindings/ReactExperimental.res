@@ -10,3 +10,8 @@ module SuspenseList = {
     ~revealOrder: [#forwards | #backwards | #together]=?,
   ) => React.element = "SuspenseList"
 }
+
+module Cache = {
+  @module("react") @react.component
+  external make: (~children: React.element) => React.element = "unstable_Cache"
+}
