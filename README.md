@@ -1,6 +1,6 @@
 # ReScript Relay Issue Tracker Example
 
-[ReScript Relay](https://github.com/zth/rescript-realy) port of Relay's [official issue tracker example](https://github.com/relayjs/relay-examples/blob/main/issue-tracker)
+[ReScript Relay](https://github.com/zth/rescript-relay) port of Relay's [official issue tracker example](https://github.com/relayjs/relay-examples/blob/main/issue-tracker)
 
 This is an all-in-one demo for
 - Understanding [ReScript](https://rescript-lang.org)
