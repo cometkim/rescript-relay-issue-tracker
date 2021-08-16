@@ -54,7 +54,7 @@ let make = (~issue) => {
                 login: "ghost",
                 avatarUrl: "https://avatars.githubusercontent.com/u/10137?v=4",
               })
-              <React.Suspense fallback={React.null}>
+              <React.Suspense fallback={React.null} key=comment.id>
                 <div className="issue-comment">
                   <SuspenseImage
                     className="issue-comment-author-image"

@@ -209,7 +209,8 @@ function IssueDetailComments(Props) {
                                                                         });
                                                             })
                                                         }, undefined)))),
-                                        fallback: null
+                                        fallback: null,
+                                        key: comment.id
                                       });
                           })),
                     revealOrder: "forwards"
