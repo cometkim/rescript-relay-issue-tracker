@@ -9,3 +9,11 @@ lib/
 node_modules/
 dist/
 dist-ssr/
+
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
