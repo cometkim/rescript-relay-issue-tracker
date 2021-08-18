@@ -23,17 +23,17 @@ module ImageCache = {
     value: Js.Promise.t<string>,
   }
 
-  type t = Belt.Map.String.t<record>
+  type t = Belt.HashMap.String.t<record>
 
   @module("react")
   external get: (unit => t) => t = "unstable_getCacheForType"
 
   let make = () => {
-    Belt.Map.String.empty
+    Belt.HashMap.String.make(~hintSize=100)
   }
 
   let read = (cache, src) => {
-    let record = cache->Belt.Map.String.get(src)
+    let record = cache->Belt.HashMap.String.get(src)
 
     switch record {
     | None => {
@@ -60,7 +60,7 @@ module ImageCache = {
         })
         |> ignore
 
-        cache->Belt.Map.String.set(src, record)->ignore
+        cache->Belt.HashMap.String.set(src, record)->ignore
       }
     | Some(record) =>
       switch record {

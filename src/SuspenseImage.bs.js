@@ -1,16 +1,16 @@
 
 
 import * as React from "react";
-import * as Belt_MapString from "rescript/lib/es6/belt_MapString.js";
+import * as Belt_HashMapString from "rescript/lib/es6/belt_HashMapString.js";
 
 var $$Image = {};
 
 function make(param) {
-  
+  return Belt_HashMapString.make(100);
 }
 
 function read(cache, src) {
-  var record = Belt_MapString.get(cache, src);
+  var record = Belt_HashMapString.get(cache, src);
   if (record !== undefined) {
     var error = record.status;
     if (typeof error === "number") {
@@ -51,7 +51,7 @@ function read(cache, src) {
           };
           return Promise.resolve(src);
         });
-    Belt_MapString.set(cache, src, record$1);
+    Belt_HashMapString.set(cache, src, record$1);
     return ;
   }
 }
