@@ -65,8 +65,7 @@ function SuspenseImage(Props) {
   var src = Props.src;
   var alt = Props.alt;
   var className = Props.className;
-  var cache = React.unstable_getCacheForType(make);
-  read(cache, src);
+  read(React.unstable_getCacheForType(make), src);
   return React.createElement("img", {
               className: className,
               alt: alt,

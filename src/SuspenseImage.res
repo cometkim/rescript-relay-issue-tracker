@@ -25,12 +25,12 @@ module ImageCache = {
 
   type t = Belt.HashMap.String.t<record>
 
-  @module("react")
-  external get: (unit => t) => t = "unstable_getCacheForType"
-
   let make = () => {
     Belt.HashMap.String.make(~hintSize=100)
   }
+
+  @module("react")
+  external getOrMake: (~make: unit => t) => t = "unstable_getCacheForType"
 
   let read = (cache, src) => {
     let record = cache->Belt.HashMap.String.get(src)
@@ -74,8 +74,10 @@ module ImageCache = {
 
 @react.component
 let make = (~src, ~alt, ~className) => {
-  let cache = ImageCache.get(ImageCache.make)
-  cache->ImageCache.read(src)
+  {
+    open ImageCache
+    getOrMake(~make)->read(src)
+  }
 
   <img src alt className />
 }
