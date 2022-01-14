@@ -9,8 +9,8 @@
     "serve": "vite preview"
   },
   "resolutions": {
-    "react": "0.0.0-experimental-e4e8226c6-20210812",
-    "react-dom": "0.0.0-experimental-e4e8226c6-20210812"
+    "react": "0.0.0-experimental-c09596cc6-20220112",
+    "react-dom": "0.0.0-experimental-c09596cc6-20220112"
   },
   "dependencies": {
     "@rescript/react": "^0.10.3",
