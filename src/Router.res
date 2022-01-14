@@ -297,6 +297,7 @@ let isModifiedEvent = e => {
   }
 }
 
+
 module Link = {
   @react.component
   let make = (
@@ -306,10 +307,12 @@ module Link = {
     ~className=?,
     ~classNameDynamic=?,
     ~target as browserTarget=?,
+    ~tabIndex=?,
     ~mode=?,
     ~render=?,
     ~preloadOnHover=?,
     ~children,
+    ~onClick=?,
     (),
   ) => {
     let router = use()
@@ -350,12 +353,19 @@ module Link = {
         }}
         ?title
         ?id
+        ?tabIndex
         className={className->Belt.Option.getWithDefault("") ++
           switch classNameDynamic {
           | Some(f) => " " ++ f(url, to_->Url.make)
           | None => ""
           }}
-        onClick=changeRoute
+        onClick={e => {
+          changeRoute(e)
+          switch onClick {
+          | None => ()
+          | Some(onClick) => onClick()
+          }
+        }}
         onMouseDown={_ => preload()}
         onTouchStart={_ => preload()}
         onMouseEnter={_ =>

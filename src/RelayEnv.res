@@ -8,7 +8,7 @@ let fetchQuery: RescriptRelay.Network.fetchFunctionPromise = (
   _cacheConfig,
   _uploadables,
 ) => {
-  open Fetch
+  open Webapi.Fetch
   fetchWithInit(
     "https://api.github.com/graphql",
     RequestInit.make(

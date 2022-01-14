@@ -1,11 +1,11 @@
 @module("./index.css") external _css: string = "default"
 
-ReactDomExperimental.renderRootAtElementWithId(
+ReactDOMExperimental.renderConcurrentRootAtElementWithId(
   <React.StrictMode>
     <ReactExperimental.Cache>
       <RescriptRelay.Context.Provider environment=RelayEnv.environment>
-        <RescriptRelayRouter.Provider value={Routes.routerContext}>
-          <RescriptRelayRouter.RouteRenderer
+        <Router.Provider value={Routes.routerContext}>
+          <Router.RouteRenderer
             renderNotFound={_ => React.string("Page not found")}
             renderFallback={() => React.string("Loading fallback...")}
             renderPending={pending =>
@@ -15,7 +15,7 @@ ReactDomExperimental.renderRootAtElementWithId(
               | false => React.null
               }}
           />
-        </RescriptRelayRouter.Provider>
+        </Router.Provider>
       </RescriptRelay.Context.Provider>
     </ReactExperimental.Cache>
   </React.StrictMode>,

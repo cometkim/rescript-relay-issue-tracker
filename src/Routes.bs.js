@@ -3,16 +3,16 @@
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as React from "react";
 import * as Config from "./Config.bs.js";
+import * as Router from "./Router.bs.js";
 import * as RelayEnv from "./RelayEnv.bs.js";
 import * as RootLazy from "./RootLazy.bs.js";
 import * as HomeRootLazy from "./HomeRootLazy.bs.js";
 import * as RootQuery_graphql from "./__generated__/RootQuery_graphql.bs.js";
 import * as IssueDetailRootLazy from "./IssueDetailRootLazy.bs.js";
-import * as RescriptRelayRouter from "./RescriptRelayRouter.bs.js";
 import * as HomeRootQuery_graphql from "./__generated__/HomeRootQuery_graphql.bs.js";
 import * as IssueDetailRootQuery_graphql from "./__generated__/IssueDetailRootQuery_graphql.bs.js";
 
-var routes = RescriptRelayRouter.RouteFamily.make((function (url) {
+var routes = Router.RouteFamily.make((function (url) {
         var match = url.path;
         if (!match) {
           return "Home";
@@ -70,7 +70,7 @@ var routes = RescriptRelayRouter.RouteFamily.make((function (url) {
         return React.createElement(RootLazy.make, RootLazy.makeProps(match$1[0], React.createElement(IssueDetailRootLazy.make, IssueDetailRootLazy.makeProps(match$1[1], undefined, undefined)), undefined, undefined));
       }));
 
-var routerContext = RescriptRelayRouter.make([routes]);
+var routerContext = Router.make([routes]);
 
 export {
   routes ,

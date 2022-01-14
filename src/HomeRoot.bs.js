@@ -3,7 +3,6 @@
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as React from "react";
 import * as Issues from "./Issues.bs.js";
-import * as $$Promise from "reason-promise/src/js/promise.bs.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as RescriptRelay from "rescript-relay/src/RescriptRelay.bs.js";
 import * as RelayRuntime from "relay-runtime";
@@ -60,12 +59,13 @@ function $$fetch(environment, variables, onResult, networkCacheConfig, fetchPoli
 }
 
 function fetchPromised(environment, variables, networkCacheConfig, fetchPolicy, param) {
-  return $$Promise.map(Hooks.fetchQuery(environment, HomeRootQuery_graphql.node, HomeRootQuery_graphql.Internal.convertVariables(variables), {
-                    networkCacheConfig: networkCacheConfig,
-                    fetchPolicy: RescriptRelay.mapFetchQueryFetchPolicy(fetchPolicy)
-                  }).toPromise(), (function (res) {
-                return HomeRootQuery_graphql.Internal.convertResponse(res);
-              }));
+  var __x = Hooks.fetchQuery(environment, HomeRootQuery_graphql.node, HomeRootQuery_graphql.Internal.convertVariables(variables), {
+          networkCacheConfig: networkCacheConfig,
+          fetchPolicy: RescriptRelay.mapFetchQueryFetchPolicy(fetchPolicy)
+        }).toPromise();
+  return __x.then(function (res) {
+              return Promise.resolve(HomeRootQuery_graphql.Internal.convertResponse(res));
+            });
 }
 
 function usePreloaded(queryRef, param) {

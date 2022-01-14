@@ -1,10 +1,10 @@
 
 
 import * as React from "react";
+import * as Router from "./Router.bs.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Js_null_undefined from "rescript/lib/es6/js_null_undefined.js";
 import * as Hooks from "react-relay/hooks";
-import * as RescriptRelayRouter from "./RescriptRelayRouter.bs.js";
 import * as RescriptRelay_Internal from "rescript-relay/src/RescriptRelay_Internal.bs.js";
 import * as IssuesListItem_issue_graphql from "./__generated__/IssuesListItem_issue_graphql.bs.js";
 
@@ -34,7 +34,7 @@ var IssueFragment = {
 function IssuesListItem(Props) {
   var issue = Props.issue;
   var issue$1 = use(issue);
-  return React.createElement(RescriptRelayRouter.Link.make, {
+  return React.createElement(Router.Link.make, {
               to_: "/issue/" + issue$1.id,
               preloadOnHover: true,
               children: issue$1.title

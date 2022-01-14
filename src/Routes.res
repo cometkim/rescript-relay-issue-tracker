@@ -1,4 +1,4 @@
-let routes = RescriptRelayRouter.RouteFamily.make(
+let routes = Router.RouteFamily.make(
   ~matchUrl=url => {
     switch url.path {
     | list{} => Some(#Home)
@@ -71,4 +71,4 @@ let routes = RescriptRelayRouter.RouteFamily.make(
   },
 )
 
-let routerContext = RescriptRelayRouter.make([routes])
+let routerContext = Router.make([routes])

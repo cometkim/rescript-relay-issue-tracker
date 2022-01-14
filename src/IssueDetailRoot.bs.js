@@ -2,7 +2,6 @@
 
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as React from "react";
-import * as $$Promise from "reason-promise/src/js/promise.bs.js";
 import * as Belt_Option from "rescript/lib/es6/belt_Option.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as IssueActions from "./IssueActions.bs.js";
@@ -65,12 +64,13 @@ function $$fetch(environment, variables, onResult, networkCacheConfig, fetchPoli
 }
 
 function fetchPromised(environment, variables, networkCacheConfig, fetchPolicy, param) {
-  return $$Promise.map(Hooks.fetchQuery(environment, IssueDetailRootQuery_graphql.node, IssueDetailRootQuery_graphql.Internal.convertVariables(variables), {
-                    networkCacheConfig: networkCacheConfig,
-                    fetchPolicy: RescriptRelay.mapFetchQueryFetchPolicy(fetchPolicy)
-                  }).toPromise(), (function (res) {
-                return IssueDetailRootQuery_graphql.Internal.convertResponse(res);
-              }));
+  var __x = Hooks.fetchQuery(environment, IssueDetailRootQuery_graphql.node, IssueDetailRootQuery_graphql.Internal.convertVariables(variables), {
+          networkCacheConfig: networkCacheConfig,
+          fetchPolicy: RescriptRelay.mapFetchQueryFetchPolicy(fetchPolicy)
+        }).toPromise();
+  return __x.then(function (res) {
+              return Promise.resolve(IssueDetailRootQuery_graphql.Internal.convertResponse(res));
+            });
 }
 
 function usePreloaded(queryRef, param) {

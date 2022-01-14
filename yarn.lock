@@ -674,6 +674,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ryyppy/rescript-promise@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@ryyppy/rescript-promise@npm:2.1.0"
+  checksum: 47761ce48800e3e169d2fc6d0d381a15dd7a724e3d7a31297b5cffec30273d46f310dd9f96452fc027523950d4ab5c02a1a21d94bb06190070a30bcfc2783308
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:1":
   version: 1.1.2
   resolution: "@tootallnate/once@npm:1.1.2"
@@ -959,24 +966,6 @@ __metadata:
   bin:
     browserslist: cli.js
   checksum: 0db38f58cd84c15edd45330a57156bda5899c335d71ff52e17c395ad274ae60a1c3e4c10ab3615cef1fe043d136f126699ee5deef647f89df3a87711cc193480
-  languageName: node
-  linkType: hard
-
-"bs-fetch@npm:^0.6.2":
-  version: 0.6.2
-  resolution: "bs-fetch@npm:0.6.2"
-  checksum: 5d02f32930e47b3697ca78d1878b18bfa2cfd7126f0a81218742a1ab30349e7d4924553c8843c4bb140079bb251a2c1a38891647c9cce854254e6e61c6211798
-  languageName: node
-  linkType: hard
-
-"bs-webapi@npm:^0.19.1":
-  version: 0.19.1
-  resolution: "bs-webapi@npm:0.19.1"
-  dependencies:
-    bs-fetch: ^0.6.2
-  peerDependencies:
-    bsdoc: ^6.0.4-alpha
-  checksum: 9cba796aee56b7fd6bd167a65e8fc85b72d9a4a7dbd9df4b16b06ca21d8c838e712837f1b1e9a71cf49dfcdb3eadc587b98e0473fb8d51cda4f9a64e5a75d4b3
   languageName: node
   linkType: hard
 
@@ -2900,15 +2889,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"reason-promise@npm:^1.1.4":
-  version: 1.1.4
-  resolution: "reason-promise@npm:1.1.4"
-  peerDependencies:
-    bs-platform: ">= 7.0.0"
-  checksum: f416f74e08a04b2d7b0466d66233e71a71550cd9c4945cc98745cc8f1650c20dc17d0a25260a0eeda5c317059cae3f9bbf932d2a2856f064aae3259a52a727eb
-  languageName: node
-  linkType: hard
-
 "regenerator-runtime@npm:^0.13.4":
   version: 0.13.9
   resolution: "regenerator-runtime@npm:0.13.9"
@@ -3010,29 +2990,28 @@ fsevents@~2.3.2:
   dependencies:
     "@octokit/graphql-schema": ^10.60.1
     "@rescript/react": ^0.10.3
+    "@ryyppy/rescript-promise": ^2.1.0
     "@vitejs/plugin-react-refresh": ^1.3.1
     assert: ^2.0.0
-    bs-fetch: ^0.6.2
-    bs-webapi: ^0.19.1
     graphql: ^15.5.1
     react: experimental
     react-dom: experimental
     react-error-boundary: ^3.1.3
     react-markdown: ^7.0.0
     react-relay: ^11.0.2
-    reason-promise: ^1.1.4
     relay-compiler: ^11.0.2
     relay-config: ^11.0.2
     relay-runtime: ^11.0.2
     rescript: ^9.1.4
-    rescript-relay: ^0.21.1
+    rescript-relay: ^0.23.0
+    rescript-webapi: ^0.4.1
     vite: ^2.4.4
   languageName: unknown
   linkType: soft
 
-"rescript-relay@npm:^0.21.1":
-  version: 0.21.1
-  resolution: "rescript-relay@npm:0.21.1"
+"rescript-relay@npm:^0.23.0":
+  version: 0.23.0
+  resolution: "rescript-relay@npm:0.23.0"
   dependencies:
     mkdirp-sync: ^0.0.3
     rescript: ^9.1.2
@@ -3040,7 +3019,6 @@ fsevents@~2.3.2:
     "@rescript/react": "*"
     graphql: "*"
     react-relay: "*"
-    reason-promise: ^1.0.2
     relay-compiler: "*"
     relay-config: "*"
     relay-runtime: "*"
@@ -3048,7 +3026,14 @@ fsevents@~2.3.2:
   bin:
     rescript-relay-cli: cli/cli.js
     rescript-relay-compiler: compiler/compiler-cli.js
-  checksum: 9c3b15658ea1996f20adb8e581d3eb4908c3def635ea137436cf959fd6bd993a5ced49dc60fe1c9251adb6a2cc4fa1aba5ac3d8ac98bc26ea24250d9315d660a
+  checksum: 810a3b7ffc8993353ed08f11b2fe7a87f63bfb7949a554c88496f9826f2eca59a483e0e6b905177ba03e331d2e29b2e774a40a51bdb4f573faa19f42cc4a7115
+  languageName: node
+  linkType: hard
+
+"rescript-webapi@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "rescript-webapi@npm:0.4.1"
+  checksum: 3e4202fc424f1eb7f9c879062d75af337734135a383749aacb9906e20f1090824e6c432b1537123a408817f22137678f4d1dbb20f980a4f0fe06989428653c11
   languageName: node
   linkType: hard
 

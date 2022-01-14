@@ -128,7 +128,7 @@ function makeProps(value, children, param) {
         };
 }
 
-var No_router_in_context = /* @__PURE__ */Caml_exceptions.create("RescriptRelayRouter.No_router_in_context");
+var No_router_in_context = /* @__PURE__ */Caml_exceptions.create("Router.No_router_in_context");
 
 function replaceShallow(path) {
   var match = typeof history === "undefined" ? undefined : history;
@@ -232,7 +232,7 @@ function useRouter(param) {
               }), [router.preload]);
 }
 
-function RescriptRelayRouter$RouteRenderer(Props) {
+function Router$RouteRenderer(Props) {
   var renderPending = Props.renderPending;
   var renderFallback = Props.renderFallback;
   var renderNotFound = Props.renderNotFound;
@@ -292,7 +292,7 @@ function RescriptRelayRouter$RouteRenderer(Props) {
 }
 
 var RouteRenderer = {
-  make: RescriptRelayRouter$RouteRenderer
+  make: Router$RouteRenderer
 };
 
 function isModifiedEvent(e) {
@@ -307,17 +307,19 @@ function isModifiedEvent(e) {
   }
 }
 
-function RescriptRelayRouter$Link(Props) {
+function Router$Link(Props) {
   var to_ = Props.to_;
   var title = Props.title;
   var id = Props.id;
   var className = Props.className;
   var classNameDynamic = Props.classNameDynamic;
   var browserTarget = Props.target;
+  var tabIndex = Props.tabIndex;
   var mode = Props.mode;
   var render = Props.render;
   var preloadOnHover = Props.preloadOnHover;
   var children = Props.children;
+  var onClick = Props.onClick;
   var router = React.useContext(context);
   var url = RescriptReactRouter.useUrl(undefined, undefined);
   var changeRoute = React.useCallback((function (e) {
@@ -368,7 +370,13 @@ function RescriptRelayRouter$Link(Props) {
     target: browserTarget !== undefined ? (
         browserTarget === "blank" ? "_blank" : "_self"
       ) : "",
-    onClick: changeRoute,
+    onClick: (function (e) {
+        Curry._1(changeRoute, e);
+        if (onClick !== undefined) {
+          return Curry._1(onClick, undefined);
+        }
+        
+      }),
     onMouseDown: (function (param) {
         return Curry._1(preload, undefined);
       }),
@@ -385,6 +393,9 @@ function RescriptRelayRouter$Link(Props) {
   if (id !== undefined) {
     tmp.id = Caml_option.valFromOption(id);
   }
+  if (tabIndex !== undefined) {
+    tmp.tabIndex = Caml_option.valFromOption(tabIndex);
+  }
   if (title !== undefined) {
     tmp.title = Caml_option.valFromOption(title);
   }
@@ -392,7 +403,7 @@ function RescriptRelayRouter$Link(Props) {
 }
 
 var Link = {
-  make: RescriptRelayRouter$Link
+  make: Router$Link
 };
 
 var Provider = {

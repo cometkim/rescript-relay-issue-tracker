@@ -9,7 +9,7 @@ module IssueFragment = %relay(`
 let make = (~issue) => {
   let issue = IssueFragment.use(issue)
 
-  <RescriptRelayRouter.Link to_={`/issue/${issue.id}`} preloadOnHover=true>
+  <Router.Link to_={`/issue/${issue.id}`} preloadOnHover=true>
     {React.string(issue.title)}
-  </RescriptRelayRouter.Link>
+  </Router.Link>
 }
