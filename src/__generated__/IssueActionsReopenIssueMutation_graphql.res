@@ -3,109 +3,70 @@
 %%raw("/* @generated */")
 module Types = {
   @@ocaml.warning("-30")
-  
-  type rec response_reopenIssue = {
-    issue: option<response_reopenIssue_issue>,
-  }
-   and response_reopenIssue_issue = {
-    fragmentRefs: RescriptRelay.fragmentRefs<[ | #IssueActions_issue]>
-  }
-   and reopenIssueInput = {
+
+  type rec response_reopenIssue = {issue: option<response_reopenIssue_issue>}
+  and response_reopenIssue_issue = {fragmentRefs: RescriptRelay.fragmentRefs<[#IssueActions_issue]>}
+  and reopenIssueInput = {
     clientMutationId: option<string>,
     issueId: string,
   }
-  
-  
-  type response = {
-    reopenIssue: option<response_reopenIssue>,
-  }
+
+  type response = {reopenIssue: option<response_reopenIssue>}
   type rawResponse = response
-  type variables = {
-    input: reopenIssueInput,
-  }
+  type variables = {input: reopenIssueInput}
 }
 
 module Internal = {
   type wrapResponseRaw
-  let wrapResponseConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{"__root":{"reopenIssue":{"n":""},"reopenIssue_issue":{"f":"","n":""}}}`
-    )
-  
+  let wrapResponseConverter: Js.Dict.t<
+    Js.Dict.t<Js.Dict.t<string>>,
+  > = %raw(json`{"__root":{"reopenIssue":{"n":""},"reopenIssue_issue":{"f":"","n":""}}}`)
+
   let wrapResponseConverterMap = ()
-  let convertWrapResponse = v => v->RescriptRelay.convertObj(
-    wrapResponseConverter, 
-    wrapResponseConverterMap, 
-    Js.null
-  )
+  let convertWrapResponse = v =>
+    v->RescriptRelay.convertObj(wrapResponseConverter, wrapResponseConverterMap, Js.null)
   type responseRaw
-  let responseConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{"__root":{"reopenIssue":{"n":""},"reopenIssue_issue":{"f":"","n":""}}}`
-    )
-  
+  let responseConverter: Js.Dict.t<
+    Js.Dict.t<Js.Dict.t<string>>,
+  > = %raw(json`{"__root":{"reopenIssue":{"n":""},"reopenIssue_issue":{"f":"","n":""}}}`)
+
   let responseConverterMap = ()
-  let convertResponse = v => v->RescriptRelay.convertObj(
-    responseConverter, 
-    responseConverterMap, 
-    Js.undefined
-  )
+  let convertResponse = v =>
+    v->RescriptRelay.convertObj(responseConverter, responseConverterMap, Js.undefined)
   type wrapRawResponseRaw = wrapResponseRaw
   let convertWrapRawResponse = convertWrapResponse
   type rawResponseRaw = responseRaw
   let convertRawResponse = convertResponse
-  let variablesConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{"__root":{"input":{"r":"ReopenIssueInput"}},"ReopenIssueInput":{"clientMutationId":{"n":""}}}`
-    )
-  
-  let variablesConverterMap = ()
-  let convertVariables = v => v->RescriptRelay.convertObj(
-    variablesConverter, 
-    variablesConverterMap, 
-    Js.undefined
-  )
-}
+  let variablesConverter: Js.Dict.t<
+    Js.Dict.t<Js.Dict.t<string>>,
+  > = %raw(json`{"__root":{"input":{"r":"ReopenIssueInput"}},"ReopenIssueInput":{"clientMutationId":{"n":""}}}`)
 
+  let variablesConverterMap = ()
+  let convertVariables = v =>
+    v->RescriptRelay.convertObj(variablesConverter, variablesConverterMap, Js.undefined)
+}
 
 module Utils = {
   @@ocaml.warning("-33")
   open Types
-  let make_reopenIssueInput = (
-    ~clientMutationId=?,
-    ~issueId,
-    ()
-  ): reopenIssueInput => {
+  let make_reopenIssueInput = (~clientMutationId=?, ~issueId, ()): reopenIssueInput => {
     clientMutationId: clientMutationId,
-    issueId: issueId
+    issueId: issueId,
   }
-  
-  let makeVariables = (
-    ~input
-  ): variables => {
-    input: input
+
+  let makeVariables = (~input): variables => {
+    input: input,
   }
-  let make_response_reopenIssue_issue = (
-  ) => ()
-  let make_response_reopenIssue = (
-    ~issue=?,
-    ()
-  ): response_reopenIssue => {
-    issue: issue
+  let make_response_reopenIssue_issue = () => ()
+  let make_response_reopenIssue = (~issue=?, ()): response_reopenIssue => {
+    issue: issue,
   }
-  let makeOptimisticResponse = (
-    ~reopenIssue=?,
-    ()
-  ): rawResponse => {
-    reopenIssue: reopenIssue
+  let makeOptimisticResponse = (~reopenIssue=?, ()): rawResponse => {
+    reopenIssue: reopenIssue,
   }
 }
 type relayOperationNode
 type operationType = RescriptRelay.mutationNode<relayOperationNode>
-
 
 let node: operationType = %raw(json` (function(){
 var v0 = [
@@ -214,5 +175,3 @@ return {
   }
 };
 })() `)
-
-

@@ -297,7 +297,6 @@ let isModifiedEvent = e => {
   }
 }
 
-
 module Link = {
   @react.component
   let make = (

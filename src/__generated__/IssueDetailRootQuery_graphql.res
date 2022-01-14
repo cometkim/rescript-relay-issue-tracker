@@ -3,86 +3,59 @@
 %%raw("/* @generated */")
 module Types = {
   @@ocaml.warning("-30")
-  
+
   type rec response_node = {
-    __typename: [ | #Issue],
+    __typename: [#Issue],
     title: string,
     number: int,
     author: option<response_node_author>,
     body: string,
     closed: bool,
     url: string,
-    fragmentRefs: RescriptRelay.fragmentRefs<[ | #IssueDetailComments_issue | #IssueActions_issue]>
+    fragmentRefs: RescriptRelay.fragmentRefs<[#IssueDetailComments_issue | #IssueActions_issue]>,
   }
-   and response_node_author = {
+  and response_node_author = {
     __typename: string,
     login: string,
     avatarUrl: string,
   }
-  
-  
-  type response = {
-    node: option<response_node>,
-  }
+
+  type response = {node: option<response_node>}
   type rawResponse = response
-  type refetchVariables = {
-    id: option<string>,
+  type refetchVariables = {id: option<string>}
+  let makeRefetchVariables = (~id=?, ()): refetchVariables => {
+    id: id,
   }
-  let makeRefetchVariables = (
-    ~id=?,
-    ()
-  ): refetchVariables => {
-    id: id
-  }
-  
-  type variables = {
-    id: string,
-  }
+
+  type variables = {id: string}
 }
 
 module Internal = {
   type wrapResponseRaw
-  let wrapResponseConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{"__root":{"node_author":{"n":""},"node":{"f":"","n":"","tnf":"Issue"}}}`
-    )
-  
+  let wrapResponseConverter: Js.Dict.t<
+    Js.Dict.t<Js.Dict.t<string>>,
+  > = %raw(json`{"__root":{"node_author":{"n":""},"node":{"f":"","n":"","tnf":"Issue"}}}`)
+
   let wrapResponseConverterMap = ()
-  let convertWrapResponse = v => v->RescriptRelay.convertObj(
-    wrapResponseConverter, 
-    wrapResponseConverterMap, 
-    Js.null
-  )
+  let convertWrapResponse = v =>
+    v->RescriptRelay.convertObj(wrapResponseConverter, wrapResponseConverterMap, Js.null)
   type responseRaw
-  let responseConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{"__root":{"node_author":{"n":""},"node":{"f":"","n":"","tnf":"Issue"}}}`
-    )
-  
+  let responseConverter: Js.Dict.t<
+    Js.Dict.t<Js.Dict.t<string>>,
+  > = %raw(json`{"__root":{"node_author":{"n":""},"node":{"f":"","n":"","tnf":"Issue"}}}`)
+
   let responseConverterMap = ()
-  let convertResponse = v => v->RescriptRelay.convertObj(
-    responseConverter, 
-    responseConverterMap, 
-    Js.undefined
-  )
+  let convertResponse = v =>
+    v->RescriptRelay.convertObj(responseConverter, responseConverterMap, Js.undefined)
   type wrapRawResponseRaw = wrapResponseRaw
   let convertWrapRawResponse = convertWrapResponse
   type rawResponseRaw = responseRaw
   let convertRawResponse = convertResponse
-  let variablesConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{}`
-    )
-  
+  let variablesConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(json`{}`)
+
   let variablesConverterMap = ()
-  let convertVariables = v => v->RescriptRelay.convertObj(
-    variablesConverter, 
-    variablesConverterMap, 
-    Js.undefined
-  )
+  let convertVariables = v =>
+    v->RescriptRelay.convertObj(variablesConverter, variablesConverterMap, Js.undefined)
 }
 
 type queryRef
@@ -90,15 +63,12 @@ type queryRef
 module Utils = {
   @@ocaml.warning("-33")
   open Types
-  let makeVariables = (
-    ~id
-  ): variables => {
-    id: id
+  let makeVariables = (~id): variables => {
+    id: id,
   }
 }
 type relayOperationNode
 type operationType = RescriptRelay.queryNode<relayOperationNode>
-
 
 let node: operationType = %raw(json` (function(){
 var v0 = [
@@ -402,10 +372,10 @@ return {
 })() `)
 
 include RescriptRelay.MakeLoadQuery({
-    type variables = Types.variables
-    type loadedQueryRef = queryRef
-    type response = Types.response
-    type node = relayOperationNode
-    let query = node
-    let convertVariables = Internal.convertVariables
-  });
+  type variables = Types.variables
+  type loadedQueryRef = queryRef
+  type response = Types.response
+  type node = relayOperationNode
+  let query = node
+  let convertVariables = Internal.convertVariables
+})

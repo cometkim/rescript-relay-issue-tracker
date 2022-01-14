@@ -3,39 +3,36 @@
 %%raw("/* @generated */")
 module Types = {
   @@ocaml.warning("-30")
-  
+
   type rec response_addComment = {
     subject: option<response_addComment_subject>,
     commentEdge: option<response_addComment_commentEdge>,
   }
-   and response_addComment_subject = {
+  and response_addComment_subject = {
     __typename: string,
     id: string,
   }
-   and response_addComment_commentEdge = {
+  and response_addComment_commentEdge = {
     __id: RescriptRelay.dataId,
     node: option<response_addComment_commentEdge_node>,
   }
-   and response_addComment_commentEdge_node = {
+  and response_addComment_commentEdge_node = {
     id: string,
     author: option<response_addComment_commentEdge_node_author>,
     body: string,
   }
-   and response_addComment_commentEdge_node_author = {
+  and response_addComment_commentEdge_node_author = {
     __typename: string,
     login: string,
     avatarUrl: string,
   }
-   and addCommentInput = {
+  and addCommentInput = {
     body: string,
     clientMutationId: option<string>,
     subjectId: string,
   }
-  
-  
-  type response = {
-    addComment: option<response_addComment>,
-  }
+
+  type response = {addComment: option<response_addComment>}
   type rawResponse = response
   type variables = {
     connections: array<RescriptRelay.dataId>,
@@ -45,123 +42,88 @@ module Types = {
 
 module Internal = {
   type wrapResponseRaw
-  let wrapResponseConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{"__root":{"addComment_commentEdge":{"n":""},"addComment_commentEdge_node":{"n":""},"addComment_subject":{"n":""},"addComment_commentEdge_node_author":{"n":""},"addComment":{"n":""}}}`
-    )
-  
+  let wrapResponseConverter: Js.Dict.t<
+    Js.Dict.t<Js.Dict.t<string>>,
+  > = %raw(json`{"__root":{"addComment_commentEdge":{"n":""},"addComment_commentEdge_node":{"n":""},"addComment_subject":{"n":""},"addComment_commentEdge_node_author":{"n":""},"addComment":{"n":""}}}`)
+
   let wrapResponseConverterMap = ()
-  let convertWrapResponse = v => v->RescriptRelay.convertObj(
-    wrapResponseConverter, 
-    wrapResponseConverterMap, 
-    Js.null
-  )
+  let convertWrapResponse = v =>
+    v->RescriptRelay.convertObj(wrapResponseConverter, wrapResponseConverterMap, Js.null)
   type responseRaw
-  let responseConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{"__root":{"addComment_commentEdge":{"n":""},"addComment_commentEdge_node":{"n":""},"addComment_subject":{"n":""},"addComment_commentEdge_node_author":{"n":""},"addComment":{"n":""}}}`
-    )
-  
+  let responseConverter: Js.Dict.t<
+    Js.Dict.t<Js.Dict.t<string>>,
+  > = %raw(json`{"__root":{"addComment_commentEdge":{"n":""},"addComment_commentEdge_node":{"n":""},"addComment_subject":{"n":""},"addComment_commentEdge_node_author":{"n":""},"addComment":{"n":""}}}`)
+
   let responseConverterMap = ()
-  let convertResponse = v => v->RescriptRelay.convertObj(
-    responseConverter, 
-    responseConverterMap, 
-    Js.undefined
-  )
+  let convertResponse = v =>
+    v->RescriptRelay.convertObj(responseConverter, responseConverterMap, Js.undefined)
   type wrapRawResponseRaw = wrapResponseRaw
   let convertWrapRawResponse = convertWrapResponse
   type rawResponseRaw = responseRaw
   let convertRawResponse = convertResponse
-  let variablesConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{"__root":{"input":{"r":"AddCommentInput"}},"AddCommentInput":{"clientMutationId":{"n":""}}}`
-    )
-  
-  let variablesConverterMap = ()
-  let convertVariables = v => v->RescriptRelay.convertObj(
-    variablesConverter, 
-    variablesConverterMap, 
-    Js.undefined
-  )
-}
+  let variablesConverter: Js.Dict.t<
+    Js.Dict.t<Js.Dict.t<string>>,
+  > = %raw(json`{"__root":{"input":{"r":"AddCommentInput"}},"AddCommentInput":{"clientMutationId":{"n":""}}}`)
 
+  let variablesConverterMap = ()
+  let convertVariables = v =>
+    v->RescriptRelay.convertObj(variablesConverter, variablesConverterMap, Js.undefined)
+}
 
 module Utils = {
   @@ocaml.warning("-33")
   open Types
-  let make_addCommentInput = (
-    ~body,
-    ~clientMutationId=?,
-    ~subjectId,
-    ()
-  ): addCommentInput => {
+  let make_addCommentInput = (~body, ~clientMutationId=?, ~subjectId, ()): addCommentInput => {
     body: body,
     clientMutationId: clientMutationId,
-    subjectId: subjectId
+    subjectId: subjectId,
   }
-  
-  let makeVariables = (
-    ~connections,
-    ~input
-  ): variables => {
+
+  let makeVariables = (~connections, ~input): variables => {
     connections: connections,
-    input: input
+    input: input,
   }
   let make_response_addComment_commentEdge_node_author = (
     ~__typename,
     ~login,
-    ~avatarUrl
+    ~avatarUrl,
   ): response_addComment_commentEdge_node_author => {
     __typename: __typename,
     login: login,
-    avatarUrl: avatarUrl
+    avatarUrl: avatarUrl,
   }
   let make_response_addComment_commentEdge_node = (
     ~id,
     ~author=?,
     ~body,
-    ()
+    (),
   ): response_addComment_commentEdge_node => {
     id: id,
     author: author,
-    body: body
+    body: body,
   }
   let make_response_addComment_commentEdge = (
     ~__id,
     ~node=?,
-    ()
+    (),
   ): response_addComment_commentEdge => {
     __id: __id,
-    node: node
+    node: node,
   }
-  let make_response_addComment_subject = (
-    ~__typename,
-    ~id
-  ): response_addComment_subject => {
+  let make_response_addComment_subject = (~__typename, ~id): response_addComment_subject => {
     __typename: __typename,
-    id: id
+    id: id,
   }
-  let make_response_addComment = (
-    ~subject=?,
-    ~commentEdge=?,
-    ()
-  ): response_addComment => {
+  let make_response_addComment = (~subject=?, ~commentEdge=?, ()): response_addComment => {
     subject: subject,
-    commentEdge: commentEdge
+    commentEdge: commentEdge,
   }
-  let makeOptimisticResponse = (
-    ~addComment=?,
-    ()
-  ): rawResponse => {
-    addComment: addComment
+  let makeOptimisticResponse = (~addComment=?, ()): rawResponse => {
+    addComment: addComment,
   }
 }
 type relayOperationNode
 type operationType = RescriptRelay.mutationNode<relayOperationNode>
-
 
 let node: operationType = %raw(json` (function(){
 var v0 = [
@@ -398,5 +360,3 @@ return {
   }
 };
 })() `)
-
-

@@ -3,7 +3,7 @@
 %%raw("/* @generated */")
 module Types = {
   @@ocaml.warning("-30")
-  
+
   type fragment = {
     id: string,
     title: string,
@@ -12,31 +12,22 @@ module Types = {
 
 module Internal = {
   type fragmentRaw
-  let fragmentConverter: 
-    Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = 
-    %raw(
-      json`{}`
-    )
-  
+  let fragmentConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(json`{}`)
+
   let fragmentConverterMap = ()
-  let convertFragment = v => v->RescriptRelay.convertObj(
-    fragmentConverter, 
-    fragmentConverterMap, 
-    Js.undefined
-  )
+  let convertFragment = v =>
+    v->RescriptRelay.convertObj(fragmentConverter, fragmentConverterMap, Js.undefined)
 }
 type t
 type fragmentRef
-external getFragmentRef:
-  RescriptRelay.fragmentRefs<[> | #IssuesListItem_issue]> => fragmentRef = "%identity"
-
+external getFragmentRef: RescriptRelay.fragmentRefs<[> #IssuesListItem_issue]> => fragmentRef =
+  "%identity"
 
 module Utils = {
 
 }
 type relayOperationNode
 type operationType = RescriptRelay.fragmentNode<relayOperationNode>
-
 
 let node: operationType = %raw(json` {
   "argumentDefinitions": [],
@@ -62,5 +53,3 @@ let node: operationType = %raw(json` {
   "type": "Issue",
   "abstractKey": null
 } `)
-
-
