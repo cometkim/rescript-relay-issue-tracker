@@ -1,4 +1,5 @@
 *.bs.js              linguist-generated
 src/__generated__/*  linguist-generated
 
+.yarn/**             linguist-vendored
 .yarn/releases/*     binary linguist-vendored
