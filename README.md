@@ -7,6 +7,8 @@ This is an all-in-one demo for
 - Understanding [Relay](https://relay.dev/)
 - Understanding [Concurrent React](https://reactjs.org/docs/concurrent-mode-intro.html)
 
+And also using experimental [ReScript Relay Router](https://www.npmjs.com/package/rescript-relay-router)!
+
 ## Start example
 
 1. Create a [Personal Access Token](https://github.com/settings/tokens/new) for the GitHub API
