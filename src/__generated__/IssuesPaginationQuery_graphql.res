@@ -1,84 +1,115 @@
+/* @sourceLoc Issues.res */
 /* @generated */
 %%raw("/* @generated */")
 module Types = {
   @@ocaml.warning("-30")
 
   type enum_IssueState = private [>
-    | #CLOSED
-    | #OPEN
-  ]
+      | #CLOSED
+      | #OPEN
+    ]
 
+  @live
   type enum_IssueState_input = [
-    | #CLOSED
-    | #OPEN
-  ]
+      | #CLOSED
+      | #OPEN
+    ]
 
-  type rec response_node = {fragmentRefs: RescriptRelay.fragmentRefs<[#Issues_repository]>}
-  type response = {node: option<response_node>}
+
+
+  @live
+  type rec response_node = {
+    @live __typename: string,
+    fragmentRefs: RescriptRelay.fragmentRefs<[ | #Issues_repository]>,
+  }
+  @live
+  type response = {
+    node: option<response_node>,
+  }
+  @live
   type rawResponse = response
-  type refetchVariables = {
-    count: option<int>,
-    cursor: option<string>,
-    states: option<
-      array<
-        [
-          | #CLOSED
-          | #OPEN
-        ],
-      >,
-    >,
-    id: option<string>,
-  }
-  let makeRefetchVariables = (~count=?, ~cursor=?, ~states=?, ~id=?, ()): refetchVariables => {
-    count: count,
-    cursor: cursor,
-    states: states,
-    id: id,
-  }
-
+  @live
   type variables = {
     count: option<int>,
     cursor: option<string>,
-    states: option<
-      array<
-        [
-          | #CLOSED
-          | #OPEN
-        ],
-      >,
-    >,
-    id: string,
+    @live id: string,
+    states: option<array<[
+      | #CLOSED
+      | #OPEN
+    ]>>,
   }
+  @live
+  type refetchVariables = {
+    count: option<option<int>>,
+    cursor: option<option<string>>,
+    @live id: option<string>,
+    states: option<option<array<[
+      | #CLOSED
+      | #OPEN
+    ]>>>,
+  }
+  @live let makeRefetchVariables = (
+    ~count=?,
+    ~cursor=?,
+    ~id=?,
+    ~states=?,
+    ()
+  ): refetchVariables => {
+    count: count,
+    cursor: cursor,
+    id: id,
+    states: states
+  }
+
 }
 
 module Internal = {
+  @live
+  let variablesConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{}`
+  )
+  @live
+  let variablesConverterMap = ()
+  @live
+  let convertVariables = v => v->RescriptRelay.convertObj(
+    variablesConverter,
+    variablesConverterMap,
+    Js.undefined
+  )
+  @live
   type wrapResponseRaw
-  let wrapResponseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"node":{"f":"","n":""}}}`)
-
+  @live
+  let wrapResponseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"__root":{"node":{"f":""}}}`
+  )
+  @live
   let wrapResponseConverterMap = ()
-  let convertWrapResponse = v =>
-    v->RescriptRelay.convertObj(wrapResponseConverter, wrapResponseConverterMap, Js.null)
+  @live
+  let convertWrapResponse = v => v->RescriptRelay.convertObj(
+    wrapResponseConverter,
+    wrapResponseConverterMap,
+    Js.null
+  )
+  @live
   type responseRaw
-  let responseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"node":{"f":"","n":""}}}`)
-
+  @live
+  let responseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"__root":{"node":{"f":""}}}`
+  )
+  @live
   let responseConverterMap = ()
-  let convertResponse = v =>
-    v->RescriptRelay.convertObj(responseConverter, responseConverterMap, Js.undefined)
+  @live
+  let convertResponse = v => v->RescriptRelay.convertObj(
+    responseConverter,
+    responseConverterMap,
+    Js.undefined
+  )
   type wrapRawResponseRaw = wrapResponseRaw
+  @live
   let convertWrapRawResponse = convertWrapResponse
   type rawResponseRaw = responseRaw
+  @live
   let convertRawResponse = convertResponse
-  let variablesConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"cursor":{"n":""},"count":{"n":""},"states":{"n":""}}}`)
-
-  let variablesConverterMap = ()
-  let convertVariables = v =>
-    v->RescriptRelay.convertObj(variablesConverter, variablesConverterMap, Js.undefined)
 }
 
 type queryRef
@@ -86,17 +117,38 @@ type queryRef
 module Utils = {
   @@ocaml.warning("-33")
   open Types
+  @live
   external issueState_toString: enum_IssueState => string = "%identity"
+  @live
   external issueState_input_toString: enum_IssueState_input => string = "%identity"
-  let makeVariables = (~count=?, ~cursor=?, ~states=?, ~id, ()): variables => {
-    count: count,
-    cursor: cursor,
-    states: states,
-    id: id,
+  @live
+  let issueState_decode = (enum: enum_IssueState): option<enum_IssueState_input> => {
+    switch enum {
+      | #...enum_IssueState_input as valid => Some(valid)
+      | _ => None
+    }
   }
+  @live
+  let issueState_fromString = (str: string): option<enum_IssueState_input> => {
+    issueState_decode(Obj.magic(str))
+  }
+  @live @obj external makeVariables: (
+    ~count: int=?,
+    ~cursor: string=?,
+    ~id: string,
+    ~states: array<[
+      | #CLOSED
+      | #OPEN
+    ]>=?,
+    unit
+  ) => variables = ""
+
+
 }
+
 type relayOperationNode
 type operationType = RescriptRelay.queryNode<relayOperationNode>
+
 
 let node: operationType = %raw(json` (function(){
 var v0 = {
@@ -127,16 +179,16 @@ v4 = [
   }
 ],
 v5 = {
-  "kind": "Variable",
-  "name": "states",
-  "variableName": "states"
-},
-v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
+},
+v6 = {
+  "kind": "Variable",
+  "name": "states",
+  "variableName": "states"
 },
 v7 = {
   "alias": null,
@@ -156,7 +208,7 @@ v8 = [
     "name": "first",
     "variableName": "count"
   },
-  (v5/*: any*/)
+  (v6/*: any*/)
 ];
 return {
   "fragment": {
@@ -178,6 +230,7 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
+          (v5/*: any*/),
           {
             "args": [
               {
@@ -190,7 +243,7 @@ return {
                 "name": "cursor",
                 "variableName": "cursor"
               },
-              (v5/*: any*/)
+              (v6/*: any*/)
             ],
             "kind": "FragmentSpread",
             "name": "Issues_repository"
@@ -221,7 +274,7 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
-          (v6/*: any*/),
+          (v5/*: any*/),
           (v7/*: any*/),
           {
             "kind": "InlineFragment",
@@ -258,7 +311,7 @@ return {
                             "name": "title",
                             "storageKey": null
                           },
-                          (v6/*: any*/)
+                          (v5/*: any*/)
                         ],
                         "storageKey": null
                       },
@@ -344,10 +397,10 @@ return {
 })() `)
 
 include RescriptRelay.MakeLoadQuery({
-  type variables = Types.variables
-  type loadedQueryRef = queryRef
-  type response = Types.response
-  type node = relayOperationNode
-  let query = node
-  let convertVariables = Internal.convertVariables
-})
+    type variables = Types.variables
+    type loadedQueryRef = queryRef
+    type response = Types.response
+    type node = relayOperationNode
+    let query = node
+    let convertVariables = Internal.convertVariables
+});

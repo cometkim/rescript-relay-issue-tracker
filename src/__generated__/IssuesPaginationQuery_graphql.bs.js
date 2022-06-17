@@ -2,12 +2,12 @@
 
 import * as RescriptRelay from "rescript-relay/src/RescriptRelay.bs.js";
 
-function makeRefetchVariables(count, cursor, states, id, param) {
+function makeRefetchVariables(count, cursor, id, states, param) {
   return {
           count: count,
           cursor: cursor,
-          states: states,
-          id: id
+          id: id,
+          states: states
         };
 }
 
@@ -15,25 +15,28 @@ var Types = {
   makeRefetchVariables: makeRefetchVariables
 };
 
-var wrapResponseConverter = {"__root":{"node":{"f":"","n":""}}};
-
-function convertWrapResponse(v) {
-  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
-}
-
-var responseConverter = {"__root":{"node":{"f":"","n":""}}};
-
-function convertResponse(v) {
-  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
-}
-
-var variablesConverter = {"__root":{"cursor":{"n":""},"count":{"n":""},"states":{"n":""}}};
+var variablesConverter = {};
 
 function convertVariables(v) {
   return RescriptRelay.convertObj(v, variablesConverter, undefined, undefined);
 }
 
+var wrapResponseConverter = {"__root":{"node":{"f":""}}};
+
+function convertWrapResponse(v) {
+  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
+}
+
+var responseConverter = {"__root":{"node":{"f":""}}};
+
+function convertResponse(v) {
+  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
+}
+
 var Internal = {
+  variablesConverter: variablesConverter,
+  variablesConverterMap: undefined,
+  convertVariables: convertVariables,
   wrapResponseConverter: wrapResponseConverter,
   wrapResponseConverterMap: undefined,
   convertWrapResponse: convertWrapResponse,
@@ -41,23 +44,21 @@ var Internal = {
   responseConverterMap: undefined,
   convertResponse: convertResponse,
   convertWrapRawResponse: convertWrapResponse,
-  convertRawResponse: convertResponse,
-  variablesConverter: variablesConverter,
-  variablesConverterMap: undefined,
-  convertVariables: convertVariables
+  convertRawResponse: convertResponse
 };
 
-function makeVariables(count, cursor, states, id, param) {
-  return {
-          count: count,
-          cursor: cursor,
-          states: states,
-          id: id
-        };
+function issueState_decode($$enum) {
+  if ($$enum === "OPEN" || $$enum === "CLOSED") {
+    return $$enum;
+  }
+  
 }
 
+var issueState_fromString = issueState_decode;
+
 var Utils = {
-  makeVariables: makeVariables
+  issueState_decode: issueState_decode,
+  issueState_fromString: issueState_fromString
 };
 
 var node = ((function(){
@@ -89,16 +90,16 @@ v4 = [
   }
 ],
 v5 = {
-  "kind": "Variable",
-  "name": "states",
-  "variableName": "states"
-},
-v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
+},
+v6 = {
+  "kind": "Variable",
+  "name": "states",
+  "variableName": "states"
 },
 v7 = {
   "alias": null,
@@ -118,7 +119,7 @@ v8 = [
     "name": "first",
     "variableName": "count"
   },
-  (v5/*: any*/)
+  (v6/*: any*/)
 ];
 return {
   "fragment": {
@@ -140,6 +141,7 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
+          (v5/*: any*/),
           {
             "args": [
               {
@@ -152,7 +154,7 @@ return {
                 "name": "cursor",
                 "variableName": "cursor"
               },
-              (v5/*: any*/)
+              (v6/*: any*/)
             ],
             "kind": "FragmentSpread",
             "name": "Issues_repository"
@@ -183,7 +185,7 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
-          (v6/*: any*/),
+          (v5/*: any*/),
           (v7/*: any*/),
           {
             "kind": "InlineFragment",
@@ -220,7 +222,7 @@ return {
                             "name": "title",
                             "storageKey": null
                           },
-                          (v6/*: any*/)
+                          (v5/*: any*/)
                         ],
                         "storageKey": null
                       },

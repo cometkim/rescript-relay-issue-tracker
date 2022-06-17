@@ -36,7 +36,7 @@ function useRefetchable(fRef) {
           data,
           React.useMemo((function () {
                   return function (param, param$1, param$2, param$3) {
-                    return Curry._2(refetchFn, RescriptRelay_Internal.internal_cleanObjectFromUndefinedRaw(IssueDetailCommentsQuery_graphql.Internal.convertVariables(param)), internal_makeRefetchableFnOpts(param$1, param$2, undefined));
+                    return Curry._2(refetchFn, RescriptRelay_Internal.internal_removeUndefinedAndConvertNullsRaw(IssueDetailCommentsQuery_graphql.Internal.convertVariables(param)), internal_makeRefetchableFnOpts(param$1, param$2, undefined));
                   };
                 }), [refetchFn])
         ];
@@ -186,8 +186,8 @@ function IssueDetailComments(Props) {
                             }
                             var author = Belt_Option.getWithDefault(comment.author, {
                                   __typename: "User",
-                                  login: "ghost",
-                                  avatarUrl: "https://avatars.githubusercontent.com/u/10137?v=4"
+                                  avatarUrl: "https://avatars.githubusercontent.com/u/10137?v=4",
+                                  login: "ghost"
                                 });
                             return React.createElement(React.Suspense, {
                                         children: React.createElement("div", {

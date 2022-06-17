@@ -4,69 +4,99 @@
 module Types = {
   @@ocaml.warning("-30")
 
-  type rec response_reopenIssue = {issue: option<response_reopenIssue_issue>}
-  and response_reopenIssue_issue = {fragmentRefs: RescriptRelay.fragmentRefs<[#IssueActions_issue]>}
-  and reopenIssueInput = {
+  @live
+  type rec reopenIssueInput = {
     clientMutationId: option<string>,
     issueId: string,
   }
-
-  type response = {reopenIssue: option<response_reopenIssue>}
+  @live
+  type rec response_reopenIssue_issue = {
+    fragmentRefs: RescriptRelay.fragmentRefs<[ | #IssueActions_issue]>,
+  }
+  @live
+  and response_reopenIssue = {
+    issue: option<response_reopenIssue_issue>,
+  }
+  @live
+  type response = {
+    reopenIssue: option<response_reopenIssue>,
+  }
+  @live
   type rawResponse = response
-  type variables = {input: reopenIssueInput}
+  @live
+  type variables = {
+    input: reopenIssueInput,
+  }
 }
 
 module Internal = {
+  @live
+  let variablesConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"reopenIssueInput":{},"__root":{"input":{"r":"reopenIssueInput"}}}`
+  )
+  @live
+  let variablesConverterMap = ()
+  @live
+  let convertVariables = v => v->RescriptRelay.convertObj(
+    variablesConverter,
+    variablesConverterMap,
+    Js.undefined
+  )
+  @live
   type wrapResponseRaw
-  let wrapResponseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"reopenIssue":{"n":""},"reopenIssue_issue":{"f":"","n":""}}}`)
-
+  @live
+  let wrapResponseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"__root":{"reopenIssue_issue":{"f":""}}}`
+  )
+  @live
   let wrapResponseConverterMap = ()
-  let convertWrapResponse = v =>
-    v->RescriptRelay.convertObj(wrapResponseConverter, wrapResponseConverterMap, Js.null)
+  @live
+  let convertWrapResponse = v => v->RescriptRelay.convertObj(
+    wrapResponseConverter,
+    wrapResponseConverterMap,
+    Js.null
+  )
+  @live
   type responseRaw
-  let responseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"reopenIssue":{"n":""},"reopenIssue_issue":{"f":"","n":""}}}`)
-
+  @live
+  let responseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"__root":{"reopenIssue_issue":{"f":""}}}`
+  )
+  @live
   let responseConverterMap = ()
-  let convertResponse = v =>
-    v->RescriptRelay.convertObj(responseConverter, responseConverterMap, Js.undefined)
+  @live
+  let convertResponse = v => v->RescriptRelay.convertObj(
+    responseConverter,
+    responseConverterMap,
+    Js.undefined
+  )
   type wrapRawResponseRaw = wrapResponseRaw
+  @live
   let convertWrapRawResponse = convertWrapResponse
   type rawResponseRaw = responseRaw
+  @live
   let convertRawResponse = convertResponse
-  let variablesConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"input":{"r":"ReopenIssueInput"}},"ReopenIssueInput":{"clientMutationId":{"n":""}}}`)
-
-  let variablesConverterMap = ()
-  let convertVariables = v =>
-    v->RescriptRelay.convertObj(variablesConverter, variablesConverterMap, Js.undefined)
 }
-
 module Utils = {
   @@ocaml.warning("-33")
   open Types
-  let make_reopenIssueInput = (~clientMutationId=?, ~issueId, ()): reopenIssueInput => {
-    clientMutationId: clientMutationId,
-    issueId: issueId,
-  }
+  @live @obj external make_reopenIssueInput: (
+    ~clientMutationId: string=?,
+    ~issueId: string,
+    unit
+  ) => reopenIssueInput = ""
 
-  let makeVariables = (~input): variables => {
-    input: input,
-  }
-  let make_response_reopenIssue_issue = () => ()
-  let make_response_reopenIssue = (~issue=?, ()): response_reopenIssue => {
-    issue: issue,
-  }
-  let makeOptimisticResponse = (~reopenIssue=?, ()): rawResponse => {
-    reopenIssue: reopenIssue,
-  }
+
+  @live @obj external makeVariables: (
+    ~input: reopenIssueInput,
+  ) => variables = ""
+
+
 }
+
 type relayOperationNode
 type operationType = RescriptRelay.mutationNode<relayOperationNode>
+
 
 let node: operationType = %raw(json` (function(){
 var v0 = [
@@ -175,3 +205,5 @@ return {
   }
 };
 })() `)
+
+

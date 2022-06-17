@@ -2,22 +2,25 @@
 
 ReactDOMExperimental.renderConcurrentRootAtElementWithId(
   <React.StrictMode>
-    <ReactExperimental.Cache>
-      <RescriptRelay.Context.Provider environment=RelayEnv.environment>
-        <Router.Provider value={Routes.routerContext}>
-          <Router.RouteRenderer
-            renderNotFound={_ => React.string("Page not found")}
-            renderFallback={() => React.string("Loading fallback...")}
-            renderPending={pending =>
-              switch pending {
-              | true =>
-                <div className="RouteRenderer-pending"> {React.string("Loading pending...")} </div>
-              | false => React.null
-              }}
-          />
-        </Router.Provider>
-      </RescriptRelay.Context.Provider>
-    </ReactExperimental.Cache>
+    <RescriptRelay.Context.Provider environment=RelayEnv.environment>
+      <RelayRouter.Provider value=Router.routerContext>
+        <React.Suspense fallback={React.string("Loading...")}>
+          <RescriptReactErrorBoundary fallback={_ => React.string("Error!")}>
+            <RelayRouter.RouteRenderer
+              renderFallback={_ => React.string("Loading fallback...")}
+              renderPending={pending =>
+                switch pending {
+                | true =>
+                  <div className="RouteRenderer-pending">
+                    {React.string("Loading pending...")}
+                  </div>
+                | false => React.null
+                }}
+            />
+          </RescriptReactErrorBoundary>
+        </React.Suspense>
+      </RelayRouter.Provider>
+    </RescriptRelay.Context.Provider>
   </React.StrictMode>,
   "root",
 )

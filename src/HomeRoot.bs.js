@@ -78,10 +78,7 @@ function retain(environment, variables) {
   return environment.retain(operationDescriptor);
 }
 
-var HomeRootQuery_makeVariables = HomeRootQuery_graphql.Utils.makeVariables;
-
 var HomeRootQuery = {
-  makeVariables: HomeRootQuery_makeVariables,
   Types: undefined,
   use: use,
   useLoader: useLoader,

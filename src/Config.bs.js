@@ -1,9 +1,9 @@
 
 
 
-var owner = "zth";
+var owner = "facebook";
 
-var name = "rescript-relay";
+var name = "relay";
 
 export {
   owner ,

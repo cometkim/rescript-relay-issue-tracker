@@ -4,36 +4,46 @@
 module Types = {
   @@ocaml.warning("-30")
 
-  type rec response_addComment = {
-    subject: option<response_addComment_subject>,
-    commentEdge: option<response_addComment_commentEdge>,
-  }
-  and response_addComment_subject = {
-    __typename: string,
-    id: string,
-  }
-  and response_addComment_commentEdge = {
-    __id: RescriptRelay.dataId,
-    node: option<response_addComment_commentEdge_node>,
-  }
-  and response_addComment_commentEdge_node = {
-    id: string,
-    author: option<response_addComment_commentEdge_node_author>,
-    body: string,
-  }
-  and response_addComment_commentEdge_node_author = {
-    __typename: string,
-    login: string,
-    avatarUrl: string,
-  }
-  and addCommentInput = {
+  @live
+  type rec addCommentInput = {
     body: string,
     clientMutationId: option<string>,
     subjectId: string,
   }
-
-  type response = {addComment: option<response_addComment>}
+  @live
+  type rec response_addComment_commentEdge_node_author = {
+    @live __typename: string,
+    avatarUrl: string,
+    login: string,
+  }
+  @live
+  and response_addComment_commentEdge_node = {
+    author: option<response_addComment_commentEdge_node_author>,
+    body: string,
+    @live id: string,
+  }
+  @live
+  and response_addComment_commentEdge = {
+    @live __id: RescriptRelay.dataId,
+    node: option<response_addComment_commentEdge_node>,
+  }
+  @live
+  and response_addComment_subject = {
+    @live __typename: string,
+    @live id: string,
+  }
+  @live
+  and response_addComment = {
+    commentEdge: option<response_addComment_commentEdge>,
+    subject: option<response_addComment_subject>,
+  }
+  @live
+  type response = {
+    addComment: option<response_addComment>,
+  }
+  @live
   type rawResponse = response
+  @live
   type variables = {
     connections: array<RescriptRelay.dataId>,
     input: addCommentInput,
@@ -41,89 +51,75 @@ module Types = {
 }
 
 module Internal = {
+  @live
+  let variablesConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"addCommentInput":{},"__root":{"input":{"r":"addCommentInput"}}}`
+  )
+  @live
+  let variablesConverterMap = ()
+  @live
+  let convertVariables = v => v->RescriptRelay.convertObj(
+    variablesConverter,
+    variablesConverterMap,
+    Js.undefined
+  )
+  @live
   type wrapResponseRaw
-  let wrapResponseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"addComment_commentEdge":{"n":""},"addComment_commentEdge_node":{"n":""},"addComment_subject":{"n":""},"addComment_commentEdge_node_author":{"n":""},"addComment":{"n":""}}}`)
-
+  @live
+  let wrapResponseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{}`
+  )
+  @live
   let wrapResponseConverterMap = ()
-  let convertWrapResponse = v =>
-    v->RescriptRelay.convertObj(wrapResponseConverter, wrapResponseConverterMap, Js.null)
+  @live
+  let convertWrapResponse = v => v->RescriptRelay.convertObj(
+    wrapResponseConverter,
+    wrapResponseConverterMap,
+    Js.null
+  )
+  @live
   type responseRaw
-  let responseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"addComment_commentEdge":{"n":""},"addComment_commentEdge_node":{"n":""},"addComment_subject":{"n":""},"addComment_commentEdge_node_author":{"n":""},"addComment":{"n":""}}}`)
-
+  @live
+  let responseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{}`
+  )
+  @live
   let responseConverterMap = ()
-  let convertResponse = v =>
-    v->RescriptRelay.convertObj(responseConverter, responseConverterMap, Js.undefined)
+  @live
+  let convertResponse = v => v->RescriptRelay.convertObj(
+    responseConverter,
+    responseConverterMap,
+    Js.undefined
+  )
   type wrapRawResponseRaw = wrapResponseRaw
+  @live
   let convertWrapRawResponse = convertWrapResponse
   type rawResponseRaw = responseRaw
+  @live
   let convertRawResponse = convertResponse
-  let variablesConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"input":{"r":"AddCommentInput"}},"AddCommentInput":{"clientMutationId":{"n":""}}}`)
-
-  let variablesConverterMap = ()
-  let convertVariables = v =>
-    v->RescriptRelay.convertObj(variablesConverter, variablesConverterMap, Js.undefined)
 }
-
 module Utils = {
   @@ocaml.warning("-33")
   open Types
-  let make_addCommentInput = (~body, ~clientMutationId=?, ~subjectId, ()): addCommentInput => {
-    body: body,
-    clientMutationId: clientMutationId,
-    subjectId: subjectId,
-  }
+  @live @obj external make_addCommentInput: (
+    ~body: string,
+    ~clientMutationId: string=?,
+    ~subjectId: string,
+    unit
+  ) => addCommentInput = ""
 
-  let makeVariables = (~connections, ~input): variables => {
-    connections: connections,
-    input: input,
-  }
-  let make_response_addComment_commentEdge_node_author = (
-    ~__typename,
-    ~login,
-    ~avatarUrl,
-  ): response_addComment_commentEdge_node_author => {
-    __typename: __typename,
-    login: login,
-    avatarUrl: avatarUrl,
-  }
-  let make_response_addComment_commentEdge_node = (
-    ~id,
-    ~author=?,
-    ~body,
-    (),
-  ): response_addComment_commentEdge_node => {
-    id: id,
-    author: author,
-    body: body,
-  }
-  let make_response_addComment_commentEdge = (
-    ~__id,
-    ~node=?,
-    (),
-  ): response_addComment_commentEdge => {
-    __id: __id,
-    node: node,
-  }
-  let make_response_addComment_subject = (~__typename, ~id): response_addComment_subject => {
-    __typename: __typename,
-    id: id,
-  }
-  let make_response_addComment = (~subject=?, ~commentEdge=?, ()): response_addComment => {
-    subject: subject,
-    commentEdge: commentEdge,
-  }
-  let makeOptimisticResponse = (~addComment=?, ()): rawResponse => {
-    addComment: addComment,
-  }
+
+  @live @obj external makeVariables: (
+    ~connections: array<RescriptRelay.dataId>,
+    ~input: addCommentInput,
+  ) => variables = ""
+
+
 }
+
 type relayOperationNode
 type operationType = RescriptRelay.mutationNode<relayOperationNode>
+
 
 let node: operationType = %raw(json` (function(){
 var v0 = [
@@ -351,12 +347,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "19434bd8bebd271b879ea580f6c6ecaf",
+    "cacheID": "8d8d27626455e44c2134d49271359700",
     "id": null,
     "metadata": {},
     "name": "IssueActionsAddCommentMutation",
     "operationKind": "mutation",
-    "text": "mutation IssueActionsAddCommentMutation(\n  $input: AddCommentInput!\n) {\n  addComment(input: $input) {\n    subject {\n      __typename\n      id\n    }\n    commentEdge {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        body\n      }\n    }\n  }\n}\n"
+    "text": "mutation IssueActionsAddCommentMutation(\n  $input: AddCommentInput!\n) {\n  addComment(input: $input) {\n    subject {\n      __typename\n      id\n    }\n    commentEdge {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __typename\n            __isNode: __typename\n            id\n          }\n        }\n        body\n      }\n    }\n  }\n}\n"
   }
 };
 })() `)
+
+

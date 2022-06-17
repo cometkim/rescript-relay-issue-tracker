@@ -83,10 +83,7 @@ function retain(environment, variables) {
   return environment.retain(operationDescriptor);
 }
 
-var IssueDetailRootQuery_makeVariables = IssueDetailRootQuery_graphql.Utils.makeVariables;
-
 var IssueDetailRootQuery = {
-  makeVariables: IssueDetailRootQuery_makeVariables,
   Types: undefined,
   use: use,
   useLoader: useLoader,
@@ -105,8 +102,8 @@ function IssueDetailRoot(Props) {
   }
   var author = Belt_Option.getWithDefault(issue.author, {
         __typename: "User",
-        login: "ghost",
-        avatarUrl: "https://avatars.githubusercontent.com/u/10137?v=4"
+        avatarUrl: "https://avatars.githubusercontent.com/u/10137?v=4",
+        login: "ghost"
       });
   return React.createElement("div", {
               className: "issue"

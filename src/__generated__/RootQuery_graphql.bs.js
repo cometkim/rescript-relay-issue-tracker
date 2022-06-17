@@ -2,10 +2,10 @@
 
 import * as RescriptRelay from "rescript-relay/src/RescriptRelay.bs.js";
 
-function makeRefetchVariables(owner, name, param) {
+function makeRefetchVariables(name, owner, param) {
   return {
-          owner: owner,
-          name: name
+          name: name,
+          owner: owner
         };
 }
 
@@ -13,25 +13,28 @@ var Types = {
   makeRefetchVariables: makeRefetchVariables
 };
 
-var wrapResponseConverter = {"__root":{"repository":{"n":""}}};
-
-function convertWrapResponse(v) {
-  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
-}
-
-var responseConverter = {"__root":{"repository":{"n":""}}};
-
-function convertResponse(v) {
-  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
-}
-
 var variablesConverter = {};
 
 function convertVariables(v) {
   return RescriptRelay.convertObj(v, variablesConverter, undefined, undefined);
 }
 
+var wrapResponseConverter = {};
+
+function convertWrapResponse(v) {
+  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
+}
+
+var responseConverter = {};
+
+function convertResponse(v) {
+  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
+}
+
 var Internal = {
+  variablesConverter: variablesConverter,
+  variablesConverterMap: undefined,
+  convertVariables: convertVariables,
   wrapResponseConverter: wrapResponseConverter,
   wrapResponseConverterMap: undefined,
   convertWrapResponse: convertWrapResponse,
@@ -39,22 +42,10 @@ var Internal = {
   responseConverterMap: undefined,
   convertResponse: convertResponse,
   convertWrapRawResponse: convertWrapResponse,
-  convertRawResponse: convertResponse,
-  variablesConverter: variablesConverter,
-  variablesConverterMap: undefined,
-  convertVariables: convertVariables
+  convertRawResponse: convertResponse
 };
 
-function makeVariables(owner, name) {
-  return {
-          owner: owner,
-          name: name
-        };
-}
-
-var Utils = {
-  makeVariables: makeVariables
-};
+var Utils = {};
 
 var node = ((function(){
 var v0 = {

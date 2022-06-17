@@ -4,69 +4,99 @@
 module Types = {
   @@ocaml.warning("-30")
 
-  type rec response_closeIssue = {issue: option<response_closeIssue_issue>}
-  and response_closeIssue_issue = {fragmentRefs: RescriptRelay.fragmentRefs<[#IssueActions_issue]>}
-  and closeIssueInput = {
+  @live
+  type rec closeIssueInput = {
     clientMutationId: option<string>,
     issueId: string,
   }
-
-  type response = {closeIssue: option<response_closeIssue>}
+  @live
+  type rec response_closeIssue_issue = {
+    fragmentRefs: RescriptRelay.fragmentRefs<[ | #IssueActions_issue]>,
+  }
+  @live
+  and response_closeIssue = {
+    issue: option<response_closeIssue_issue>,
+  }
+  @live
+  type response = {
+    closeIssue: option<response_closeIssue>,
+  }
+  @live
   type rawResponse = response
-  type variables = {input: closeIssueInput}
+  @live
+  type variables = {
+    input: closeIssueInput,
+  }
 }
 
 module Internal = {
+  @live
+  let variablesConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"closeIssueInput":{},"__root":{"input":{"r":"closeIssueInput"}}}`
+  )
+  @live
+  let variablesConverterMap = ()
+  @live
+  let convertVariables = v => v->RescriptRelay.convertObj(
+    variablesConverter,
+    variablesConverterMap,
+    Js.undefined
+  )
+  @live
   type wrapResponseRaw
-  let wrapResponseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"closeIssue_issue":{"f":"","n":""},"closeIssue":{"n":""}}}`)
-
+  @live
+  let wrapResponseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"__root":{"closeIssue_issue":{"f":""}}}`
+  )
+  @live
   let wrapResponseConverterMap = ()
-  let convertWrapResponse = v =>
-    v->RescriptRelay.convertObj(wrapResponseConverter, wrapResponseConverterMap, Js.null)
+  @live
+  let convertWrapResponse = v => v->RescriptRelay.convertObj(
+    wrapResponseConverter,
+    wrapResponseConverterMap,
+    Js.null
+  )
+  @live
   type responseRaw
-  let responseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"closeIssue_issue":{"f":"","n":""},"closeIssue":{"n":""}}}`)
-
+  @live
+  let responseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"__root":{"closeIssue_issue":{"f":""}}}`
+  )
+  @live
   let responseConverterMap = ()
-  let convertResponse = v =>
-    v->RescriptRelay.convertObj(responseConverter, responseConverterMap, Js.undefined)
+  @live
+  let convertResponse = v => v->RescriptRelay.convertObj(
+    responseConverter,
+    responseConverterMap,
+    Js.undefined
+  )
   type wrapRawResponseRaw = wrapResponseRaw
+  @live
   let convertWrapRawResponse = convertWrapResponse
   type rawResponseRaw = responseRaw
+  @live
   let convertRawResponse = convertResponse
-  let variablesConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"CloseIssueInput":{"clientMutationId":{"n":""}},"__root":{"input":{"r":"CloseIssueInput"}}}`)
-
-  let variablesConverterMap = ()
-  let convertVariables = v =>
-    v->RescriptRelay.convertObj(variablesConverter, variablesConverterMap, Js.undefined)
 }
-
 module Utils = {
   @@ocaml.warning("-33")
   open Types
-  let make_closeIssueInput = (~clientMutationId=?, ~issueId, ()): closeIssueInput => {
-    clientMutationId: clientMutationId,
-    issueId: issueId,
-  }
+  @live @obj external make_closeIssueInput: (
+    ~clientMutationId: string=?,
+    ~issueId: string,
+    unit
+  ) => closeIssueInput = ""
 
-  let makeVariables = (~input): variables => {
-    input: input,
-  }
-  let make_response_closeIssue_issue = () => ()
-  let make_response_closeIssue = (~issue=?, ()): response_closeIssue => {
-    issue: issue,
-  }
-  let makeOptimisticResponse = (~closeIssue=?, ()): rawResponse => {
-    closeIssue: closeIssue,
-  }
+
+  @live @obj external makeVariables: (
+    ~input: closeIssueInput,
+  ) => variables = ""
+
+
 }
+
 type relayOperationNode
 type operationType = RescriptRelay.mutationNode<relayOperationNode>
+
 
 let node: operationType = %raw(json` (function(){
 var v0 = [
@@ -175,3 +205,5 @@ return {
   }
 };
 })() `)
+
+

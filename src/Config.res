@@ -1,2 +1,2 @@
-let owner = "zth"
-let name = "rescript-relay"
+let owner = "facebook"
+let name = "relay"

@@ -40,7 +40,7 @@ function fetchQuery(operation, variables, _cacheConfig, _uploadables) {
 
 var network = RelayRuntime.Network.create(fetchQuery, undefined);
 
-var environment = RescriptRelay.Environment.make(network, RescriptRelay.Store.make(new RelayRuntime.RecordSource(undefined), 10, undefined, undefined), undefined, undefined, undefined, undefined);
+var environment = RescriptRelay.Environment.make(network, RescriptRelay.Store.make(new RelayRuntime.RecordSource(undefined), 10, undefined, undefined), undefined, undefined, undefined, undefined, undefined);
 
 export {
   Graphql_error ,

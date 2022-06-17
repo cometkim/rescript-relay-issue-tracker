@@ -1,12 +1,13 @@
 
 
 import * as React from "react";
-import * as Router from "./Router.bs.js";
 import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Js_null_undefined from "rescript/lib/es6/js_null_undefined.js";
+import * as RelayRouter__Link from "rescript-relay-router/src/RelayRouter__Link.bs.js";
 import * as Hooks from "react-relay/hooks";
 import * as RescriptRelay_Internal from "rescript-relay/src/RescriptRelay_Internal.bs.js";
 import * as IssuesListItem_issue_graphql from "./__generated__/IssuesListItem_issue_graphql.bs.js";
+import * as Route__Root__IssueDetailRoot_route from "./routes/__generated__/Route__Root__IssueDetailRoot_route.bs.js";
 
 function use(fRef) {
   var data = Hooks.useFragment(IssuesListItem_issue_graphql.node, fRef);
@@ -34,9 +35,8 @@ var IssueFragment = {
 function IssuesListItem(Props) {
   var issue = Props.issue;
   var issue$1 = use(issue);
-  return React.createElement(Router.Link.make, {
-              to_: "/issue/" + issue$1.id,
-              preloadOnHover: true,
+  return React.createElement(RelayRouter__Link.make, {
+              to_: Route__Root__IssueDetailRoot_route.makeLink(issue$1.id),
               children: issue$1.title
             });
 }

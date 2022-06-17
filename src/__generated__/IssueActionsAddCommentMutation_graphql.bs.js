@@ -4,25 +4,28 @@ import * as RescriptRelay from "rescript-relay/src/RescriptRelay.bs.js";
 
 var Types = {};
 
-var wrapResponseConverter = {"__root":{"addComment_commentEdge":{"n":""},"addComment_commentEdge_node":{"n":""},"addComment_subject":{"n":""},"addComment_commentEdge_node_author":{"n":""},"addComment":{"n":""}}};
-
-function convertWrapResponse(v) {
-  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
-}
-
-var responseConverter = {"__root":{"addComment_commentEdge":{"n":""},"addComment_commentEdge_node":{"n":""},"addComment_subject":{"n":""},"addComment_commentEdge_node_author":{"n":""},"addComment":{"n":""}}};
-
-function convertResponse(v) {
-  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
-}
-
-var variablesConverter = {"__root":{"input":{"r":"AddCommentInput"}},"AddCommentInput":{"clientMutationId":{"n":""}}};
+var variablesConverter = {"addCommentInput":{},"__root":{"input":{"r":"addCommentInput"}}};
 
 function convertVariables(v) {
   return RescriptRelay.convertObj(v, variablesConverter, undefined, undefined);
 }
 
+var wrapResponseConverter = {};
+
+function convertWrapResponse(v) {
+  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
+}
+
+var responseConverter = {};
+
+function convertResponse(v) {
+  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
+}
+
 var Internal = {
+  variablesConverter: variablesConverter,
+  variablesConverterMap: undefined,
+  convertVariables: convertVariables,
   wrapResponseConverter: wrapResponseConverter,
   wrapResponseConverterMap: undefined,
   convertWrapResponse: convertWrapResponse,
@@ -30,80 +33,10 @@ var Internal = {
   responseConverterMap: undefined,
   convertResponse: convertResponse,
   convertWrapRawResponse: convertWrapResponse,
-  convertRawResponse: convertResponse,
-  variablesConverter: variablesConverter,
-  variablesConverterMap: undefined,
-  convertVariables: convertVariables
+  convertRawResponse: convertResponse
 };
 
-function make_addCommentInput(body, clientMutationId, subjectId, param) {
-  return {
-          body: body,
-          clientMutationId: clientMutationId,
-          subjectId: subjectId
-        };
-}
-
-function makeVariables(connections, input) {
-  return {
-          connections: connections,
-          input: input
-        };
-}
-
-function make_response_addComment_commentEdge_node_author(__typename, login, avatarUrl) {
-  return {
-          __typename: __typename,
-          login: login,
-          avatarUrl: avatarUrl
-        };
-}
-
-function make_response_addComment_commentEdge_node(id, author, body, param) {
-  return {
-          id: id,
-          author: author,
-          body: body
-        };
-}
-
-function make_response_addComment_commentEdge(__id, node, param) {
-  return {
-          __id: __id,
-          node: node
-        };
-}
-
-function make_response_addComment_subject(__typename, id) {
-  return {
-          __typename: __typename,
-          id: id
-        };
-}
-
-function make_response_addComment(subject, commentEdge, param) {
-  return {
-          subject: subject,
-          commentEdge: commentEdge
-        };
-}
-
-function makeOptimisticResponse(addComment, param) {
-  return {
-          addComment: addComment
-        };
-}
-
-var Utils = {
-  make_addCommentInput: make_addCommentInput,
-  makeVariables: makeVariables,
-  make_response_addComment_commentEdge_node_author: make_response_addComment_commentEdge_node_author,
-  make_response_addComment_commentEdge_node: make_response_addComment_commentEdge_node,
-  make_response_addComment_commentEdge: make_response_addComment_commentEdge,
-  make_response_addComment_subject: make_response_addComment_subject,
-  make_response_addComment: make_response_addComment,
-  makeOptimisticResponse: makeOptimisticResponse
-};
+var Utils = {};
 
 var node = ((function(){
 var v0 = [
@@ -331,12 +264,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "19434bd8bebd271b879ea580f6c6ecaf",
+    "cacheID": "8d8d27626455e44c2134d49271359700",
     "id": null,
     "metadata": {},
     "name": "IssueActionsAddCommentMutation",
     "operationKind": "mutation",
-    "text": "mutation IssueActionsAddCommentMutation(\n  $input: AddCommentInput!\n) {\n  addComment(input: $input) {\n    subject {\n      __typename\n      id\n    }\n    commentEdge {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        body\n      }\n    }\n  }\n}\n"
+    "text": "mutation IssueActionsAddCommentMutation(\n  $input: AddCommentInput!\n) {\n  addComment(input: $input) {\n    subject {\n      __typename\n      id\n    }\n    commentEdge {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __typename\n            __isNode: __typename\n            id\n          }\n        }\n        body\n      }\n    }\n  }\n}\n"
   }
 };
 })());

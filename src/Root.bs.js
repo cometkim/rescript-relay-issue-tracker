@@ -77,10 +77,7 @@ function retain(environment, variables) {
   return environment.retain(operationDescriptor);
 }
 
-var RootQuery_makeVariables = RootQuery_graphql.Utils.makeVariables;
-
 var RootQuery = {
-  makeVariables: RootQuery_makeVariables,
   Types: undefined,
   use: use,
   useLoader: useLoader,

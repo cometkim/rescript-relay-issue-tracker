@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/",
+    "name": "Root",
+    "children": [
+      {
+        "path": "",
+        "name": "HomeRoot"
+      },
+      {
+        "path": "issue/:id",
+        "name": "IssueDetailRoot"
+      }
+    ]
+  }
+]

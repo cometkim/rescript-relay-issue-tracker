@@ -12,25 +12,28 @@ var Types = {
   makeRefetchVariables: makeRefetchVariables
 };
 
-var wrapResponseConverter = {"__root":{"node_author":{"n":""},"node":{"f":"","n":"","tnf":"Issue"}}};
-
-function convertWrapResponse(v) {
-  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
-}
-
-var responseConverter = {"__root":{"node_author":{"n":""},"node":{"f":"","n":"","tnf":"Issue"}}};
-
-function convertResponse(v) {
-  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
-}
-
 var variablesConverter = {};
 
 function convertVariables(v) {
   return RescriptRelay.convertObj(v, variablesConverter, undefined, undefined);
 }
 
+var wrapResponseConverter = {"__root":{"node":{"tnf":"Issue","f":""}}};
+
+function convertWrapResponse(v) {
+  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
+}
+
+var responseConverter = {"__root":{"node":{"tnf":"Issue","f":""}}};
+
+function convertResponse(v) {
+  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
+}
+
 var Internal = {
+  variablesConverter: variablesConverter,
+  variablesConverterMap: undefined,
+  convertVariables: convertVariables,
   wrapResponseConverter: wrapResponseConverter,
   wrapResponseConverterMap: undefined,
   convertWrapResponse: convertWrapResponse,
@@ -38,21 +41,10 @@ var Internal = {
   responseConverterMap: undefined,
   convertResponse: convertResponse,
   convertWrapRawResponse: convertWrapResponse,
-  convertRawResponse: convertResponse,
-  variablesConverter: variablesConverter,
-  variablesConverterMap: undefined,
-  convertVariables: convertVariables
+  convertRawResponse: convertResponse
 };
 
-function makeVariables(id) {
-  return {
-          id: id
-        };
-}
-
-var Utils = {
-  makeVariables: makeVariables
-};
+var Utils = {};
 
 var node = ((function(){
 var v0 = [
@@ -345,12 +337,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "4895b96aa0973924dd3ebfa37d637417",
+    "cacheID": "0cd2df613230a6f8f839dc505e925abb",
     "id": null,
     "metadata": {},
     "name": "IssueDetailRootQuery",
     "operationKind": "query",
-    "text": "query IssueDetailRootQuery(\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ... on Issue {\n      title\n      number\n      author {\n        __typename\n        login\n        avatarUrl\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      body\n      closed\n      url\n      ...IssueDetailComments_issue\n      ...IssueActions_issue\n    }\n    id\n  }\n}\n\nfragment IssueActions_issue on Issue {\n  id\n  closed\n}\n\nfragment IssueDetailComments_issue on Issue {\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        body\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query IssueDetailRootQuery(\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ... on Issue {\n      title\n      number\n      author {\n        __typename\n        login\n        avatarUrl\n        ... on Node {\n          __typename\n          __isNode: __typename\n          id\n        }\n      }\n      body\n      closed\n      url\n      ...IssueDetailComments_issue\n      ...IssueActions_issue\n    }\n    id\n  }\n}\n\nfragment IssueActions_issue on Issue {\n  id\n  closed\n}\n\nfragment IssueDetailComments_issue on Issue {\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __typename\n            __isNode: __typename\n            id\n          }\n        }\n        body\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })());

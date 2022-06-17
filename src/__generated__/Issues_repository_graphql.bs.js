@@ -6,7 +6,7 @@ import * as IssuesPaginationQuery_graphql from "./IssuesPaginationQuery_graphql.
 
 var Types = {};
 
-var fragmentConverter = {"__root":{"issues_edges_node":{"f":"","n":""},"issues_edges":{"n":"","na":""}}};
+var fragmentConverter = {"__root":{"issues_edges_node":{"f":""}}};
 
 function convertFragment(v) {
   return RescriptRelay.convertObj(v, fragmentConverter, undefined, undefined);
@@ -36,7 +36,7 @@ var Utils = {
   getConnectionNodes: getConnectionNodes
 };
 
-function makeNode(node_IssuesPaginationQuery) {
+function makeNode(rescript_graphql_node_IssuesPaginationQuery) {
   return ((function(){
 var v0 = [
   "issues"
@@ -81,7 +81,7 @@ return {
       "fragmentPathInResult": [
         "node"
       ],
-      "operation": node_IssuesPaginationQuery,
+      "operation": rescript_graphql_node_IssuesPaginationQuery,
       "identifierField": "id"
     }
   },
@@ -118,16 +118,16 @@ return {
               "plural": false,
               "selections": [
                 {
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "IssuesListItem_issue"
+                },
+                {
                   "alias": null,
                   "args": null,
                   "kind": "ScalarField",
                   "name": "__typename",
                   "storageKey": null
-                },
-                {
-                  "args": null,
-                  "kind": "FragmentSpread",
-                  "name": "IssuesListItem_issue"
                 }
               ],
               "storageKey": null

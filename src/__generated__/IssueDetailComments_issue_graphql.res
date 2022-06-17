@@ -4,68 +4,79 @@
 module Types = {
   @@ocaml.warning("-30")
 
-  type rec fragment_comments = {edges: option<array<option<fragment_comments_edges>>>}
-  and fragment_comments_edges = {
-    __id: RescriptRelay.dataId,
-    node: option<fragment_comments_edges_node>,
+  type rec fragment_comments_edges_node_author = {
+    @live __typename: string,
+    avatarUrl: string,
+    login: string,
   }
   and fragment_comments_edges_node = {
-    id: string,
     author: option<fragment_comments_edges_node_author>,
     body: string,
+    @live id: string,
   }
-  and fragment_comments_edges_node_author = {
-    __typename: string,
-    login: string,
-    avatarUrl: string,
+  and fragment_comments_edges = {
+    @live __id: RescriptRelay.dataId,
+    node: option<fragment_comments_edges_node>,
   }
-
+  and fragment_comments = {
+    edges: option<array<option<fragment_comments_edges>>>,
+  }
   type fragment = {
     comments: fragment_comments,
-    id: string,
+    @live id: string,
   }
 }
 
 module Internal = {
+  @live
   type fragmentRaw
-  let fragmentConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"comments_edges_node":{"n":""},"comments_edges_node_author":{"n":""},"comments_edges":{"n":"","na":""}}}`)
-
+  @live
+  let fragmentConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{}`
+  )
+  @live
   let fragmentConverterMap = ()
-  let convertFragment = v =>
-    v->RescriptRelay.convertObj(fragmentConverter, fragmentConverterMap, Js.undefined)
+  @live
+  let convertFragment = v => v->RescriptRelay.convertObj(
+    fragmentConverter,
+    fragmentConverterMap,
+    Js.undefined
+  )
 }
+
 type t
 type fragmentRef
-external getFragmentRef: RescriptRelay.fragmentRefs<[> #IssueDetailComments_issue]> => fragmentRef =
-  "%identity"
+external getFragmentRef:
+  RescriptRelay.fragmentRefs<[> | #IssueDetailComments_issue]> => fragmentRef = "%identity"
 
 module Utils = {
   @@ocaml.warning("-33")
   open Types
+  @live
   @inline
   let connectionKey = "IssueDetailComments_comments"
 
-  let getConnectionNodes: fragment_comments => array<fragment_comments_edges_node> = connection =>
+
+  @live
+  let getConnectionNodes: fragment_comments => array<fragment_comments_edges_node> = connection => 
     switch connection.edges {
-    | None => []
-    | Some(edges) =>
-      edges->Belt.Array.keepMap(edge =>
-        switch edge {
-        | None => None
-        | Some(edge) => edge.node
-        }
-      )
+      | None => []
+      | Some(edges) => edges
+        ->Belt.Array.keepMap(edge => switch edge {
+          | None => None
+          | Some(edge) => edge.node
+        })
     }
+
 }
+
 type relayOperationNode
 type operationType = RescriptRelay.fragmentNode<relayOperationNode>
 
-%%private(
-  let makeNode = (node_IssueDetailCommentsQuery): operationType => {
-    ignore(node_IssueDetailCommentsQuery)
-    %raw(json` (function(){
+
+%%private(let makeNode = (rescript_graphql_node_IssueDetailCommentsQuery): operationType => {
+  ignore(rescript_graphql_node_IssueDetailCommentsQuery)
+  %raw(json`(function(){
 var v0 = [
   "comments"
 ],
@@ -118,7 +129,7 @@ return {
       "fragmentPathInResult": [
         "node"
       ],
-      "operation": node_IssueDetailCommentsQuery,
+      "operation": rescript_graphql_node_IssueDetailCommentsQuery,
       "identifierField": "id"
     }
   },
@@ -241,7 +252,7 @@ return {
   "type": "Issue",
   "abstractKey": null
 };
-})() `)
-  }
-)
+})()`)
+})
 let node: operationType = makeNode(IssueDetailCommentsQuery_graphql.node)
+

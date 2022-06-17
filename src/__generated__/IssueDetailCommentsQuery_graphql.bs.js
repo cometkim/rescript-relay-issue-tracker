@@ -14,25 +14,28 @@ var Types = {
   makeRefetchVariables: makeRefetchVariables
 };
 
-var wrapResponseConverter = {"__root":{"node":{"f":"","n":""}}};
-
-function convertWrapResponse(v) {
-  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
-}
-
-var responseConverter = {"__root":{"node":{"f":"","n":""}}};
-
-function convertResponse(v) {
-  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
-}
-
-var variablesConverter = {"__root":{"cursor":{"n":""},"count":{"n":""}}};
+var variablesConverter = {};
 
 function convertVariables(v) {
   return RescriptRelay.convertObj(v, variablesConverter, undefined, undefined);
 }
 
+var wrapResponseConverter = {"__root":{"node":{"f":""}}};
+
+function convertWrapResponse(v) {
+  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
+}
+
+var responseConverter = {"__root":{"node":{"f":""}}};
+
+function convertResponse(v) {
+  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
+}
+
 var Internal = {
+  variablesConverter: variablesConverter,
+  variablesConverterMap: undefined,
+  convertVariables: convertVariables,
   wrapResponseConverter: wrapResponseConverter,
   wrapResponseConverterMap: undefined,
   convertWrapResponse: convertWrapResponse,
@@ -40,23 +43,10 @@ var Internal = {
   responseConverterMap: undefined,
   convertResponse: convertResponse,
   convertWrapRawResponse: convertWrapResponse,
-  convertRawResponse: convertResponse,
-  variablesConverter: variablesConverter,
-  variablesConverterMap: undefined,
-  convertVariables: convertVariables
+  convertRawResponse: convertResponse
 };
 
-function makeVariables(count, cursor, id, param) {
-  return {
-          count: count,
-          cursor: cursor,
-          id: id
-        };
-}
-
-var Utils = {
-  makeVariables: makeVariables
-};
+var Utils = {};
 
 var node = ((function(){
 var v0 = [
@@ -124,6 +114,7 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
+          (v2/*: any*/),
           {
             "args": [
               {
@@ -305,12 +296,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "363fb0118977147c40240cb79e866909",
+    "cacheID": "b751b7b661e81c165b5560c0b4da7714",
     "id": null,
     "metadata": {},
     "name": "IssueDetailCommentsQuery",
     "operationKind": "query",
-    "text": "query IssueDetailCommentsQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...IssueDetailComments_issue_1G22uz\n    id\n  }\n}\n\nfragment IssueDetailComments_issue_1G22uz on Issue {\n  comments(after: $cursor, first: $count) {\n    edges {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        body\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query IssueDetailCommentsQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...IssueDetailComments_issue_1G22uz\n    id\n  }\n}\n\nfragment IssueDetailComments_issue_1G22uz on Issue {\n  comments(after: $cursor, first: $count) {\n    edges {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __typename\n            __isNode: __typename\n            id\n          }\n        }\n        body\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })());

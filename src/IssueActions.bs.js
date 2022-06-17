@@ -86,31 +86,7 @@ function use$1(param) {
         ];
 }
 
-var AddCommentMutation_make_addCommentInput = IssueActionsAddCommentMutation_graphql.Utils.make_addCommentInput;
-
-var AddCommentMutation_makeVariables = IssueActionsAddCommentMutation_graphql.Utils.makeVariables;
-
-var AddCommentMutation_make_response_addComment_commentEdge_node_author = IssueActionsAddCommentMutation_graphql.Utils.make_response_addComment_commentEdge_node_author;
-
-var AddCommentMutation_make_response_addComment_commentEdge_node = IssueActionsAddCommentMutation_graphql.Utils.make_response_addComment_commentEdge_node;
-
-var AddCommentMutation_make_response_addComment_commentEdge = IssueActionsAddCommentMutation_graphql.Utils.make_response_addComment_commentEdge;
-
-var AddCommentMutation_make_response_addComment_subject = IssueActionsAddCommentMutation_graphql.Utils.make_response_addComment_subject;
-
-var AddCommentMutation_make_response_addComment = IssueActionsAddCommentMutation_graphql.Utils.make_response_addComment;
-
-var AddCommentMutation_makeOptimisticResponse = IssueActionsAddCommentMutation_graphql.Utils.makeOptimisticResponse;
-
 var AddCommentMutation = {
-  make_addCommentInput: AddCommentMutation_make_addCommentInput,
-  makeVariables: AddCommentMutation_makeVariables,
-  make_response_addComment_commentEdge_node_author: AddCommentMutation_make_response_addComment_commentEdge_node_author,
-  make_response_addComment_commentEdge_node: AddCommentMutation_make_response_addComment_commentEdge_node,
-  make_response_addComment_commentEdge: AddCommentMutation_make_response_addComment_commentEdge,
-  make_response_addComment_subject: AddCommentMutation_make_response_addComment_subject,
-  make_response_addComment: AddCommentMutation_make_response_addComment,
-  makeOptimisticResponse: AddCommentMutation_makeOptimisticResponse,
   Types: undefined,
   commitMutation: commitMutation,
   use: use$1
@@ -167,22 +143,7 @@ function use$2(param) {
         ];
 }
 
-var CloseIssueMutation_make_closeIssueInput = IssueActionsCloseIssueMutation_graphql.Utils.make_closeIssueInput;
-
-var CloseIssueMutation_makeVariables = IssueActionsCloseIssueMutation_graphql.Utils.makeVariables;
-
-var CloseIssueMutation_make_response_closeIssue_issue = IssueActionsCloseIssueMutation_graphql.Utils.make_response_closeIssue_issue;
-
-var CloseIssueMutation_make_response_closeIssue = IssueActionsCloseIssueMutation_graphql.Utils.make_response_closeIssue;
-
-var CloseIssueMutation_makeOptimisticResponse = IssueActionsCloseIssueMutation_graphql.Utils.makeOptimisticResponse;
-
 var CloseIssueMutation = {
-  make_closeIssueInput: CloseIssueMutation_make_closeIssueInput,
-  makeVariables: CloseIssueMutation_makeVariables,
-  make_response_closeIssue_issue: CloseIssueMutation_make_response_closeIssue_issue,
-  make_response_closeIssue: CloseIssueMutation_make_response_closeIssue,
-  makeOptimisticResponse: CloseIssueMutation_makeOptimisticResponse,
   Types: undefined,
   commitMutation: commitMutation$1,
   use: use$2
@@ -239,22 +200,7 @@ function use$3(param) {
         ];
 }
 
-var ReopenIssueMutation_make_reopenIssueInput = IssueActionsReopenIssueMutation_graphql.Utils.make_reopenIssueInput;
-
-var ReopenIssueMutation_makeVariables = IssueActionsReopenIssueMutation_graphql.Utils.makeVariables;
-
-var ReopenIssueMutation_make_response_reopenIssue_issue = IssueActionsReopenIssueMutation_graphql.Utils.make_response_reopenIssue_issue;
-
-var ReopenIssueMutation_make_response_reopenIssue = IssueActionsReopenIssueMutation_graphql.Utils.make_response_reopenIssue;
-
-var ReopenIssueMutation_makeOptimisticResponse = IssueActionsReopenIssueMutation_graphql.Utils.makeOptimisticResponse;
-
 var ReopenIssueMutation = {
-  make_reopenIssueInput: ReopenIssueMutation_make_reopenIssueInput,
-  makeVariables: ReopenIssueMutation_makeVariables,
-  make_response_reopenIssue_issue: ReopenIssueMutation_make_response_reopenIssue_issue,
-  make_response_reopenIssue: ReopenIssueMutation_make_response_reopenIssue,
-  makeOptimisticResponse: ReopenIssueMutation_makeOptimisticResponse,
   Types: undefined,
   commitMutation: commitMutation$2,
   use: use$3

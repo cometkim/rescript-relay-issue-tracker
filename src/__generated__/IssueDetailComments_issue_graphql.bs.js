@@ -6,7 +6,7 @@ import * as IssueDetailCommentsQuery_graphql from "./IssueDetailCommentsQuery_gr
 
 var Types = {};
 
-var fragmentConverter = {"__root":{"comments_edges_node":{"n":""},"comments_edges_node_author":{"n":""},"comments_edges":{"n":"","na":""}}};
+var fragmentConverter = {};
 
 function convertFragment(v) {
   return RescriptRelay.convertObj(v, fragmentConverter, undefined, undefined);
@@ -36,7 +36,7 @@ var Utils = {
   getConnectionNodes: getConnectionNodes
 };
 
-function makeNode(node_IssueDetailCommentsQuery) {
+function makeNode(rescript_graphql_node_IssueDetailCommentsQuery) {
   return ((function(){
 var v0 = [
   "comments"
@@ -90,7 +90,7 @@ return {
       "fragmentPathInResult": [
         "node"
       ],
-      "operation": node_IssueDetailCommentsQuery,
+      "operation": rescript_graphql_node_IssueDetailCommentsQuery,
       "identifierField": "id"
     }
   },

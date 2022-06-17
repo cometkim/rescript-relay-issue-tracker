@@ -4,25 +4,28 @@ import * as RescriptRelay from "rescript-relay/src/RescriptRelay.bs.js";
 
 var Types = {};
 
-var wrapResponseConverter = {"__root":{"closeIssue_issue":{"f":"","n":""},"closeIssue":{"n":""}}};
-
-function convertWrapResponse(v) {
-  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
-}
-
-var responseConverter = {"__root":{"closeIssue_issue":{"f":"","n":""},"closeIssue":{"n":""}}};
-
-function convertResponse(v) {
-  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
-}
-
-var variablesConverter = {"CloseIssueInput":{"clientMutationId":{"n":""}},"__root":{"input":{"r":"CloseIssueInput"}}};
+var variablesConverter = {"closeIssueInput":{},"__root":{"input":{"r":"closeIssueInput"}}};
 
 function convertVariables(v) {
   return RescriptRelay.convertObj(v, variablesConverter, undefined, undefined);
 }
 
+var wrapResponseConverter = {"__root":{"closeIssue_issue":{"f":""}}};
+
+function convertWrapResponse(v) {
+  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
+}
+
+var responseConverter = {"__root":{"closeIssue_issue":{"f":""}}};
+
+function convertResponse(v) {
+  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
+}
+
 var Internal = {
+  variablesConverter: variablesConverter,
+  variablesConverterMap: undefined,
+  convertVariables: convertVariables,
   wrapResponseConverter: wrapResponseConverter,
   wrapResponseConverterMap: undefined,
   convertWrapResponse: convertWrapResponse,
@@ -30,48 +33,10 @@ var Internal = {
   responseConverterMap: undefined,
   convertResponse: convertResponse,
   convertWrapRawResponse: convertWrapResponse,
-  convertRawResponse: convertResponse,
-  variablesConverter: variablesConverter,
-  variablesConverterMap: undefined,
-  convertVariables: convertVariables
+  convertRawResponse: convertResponse
 };
 
-function make_closeIssueInput(clientMutationId, issueId, param) {
-  return {
-          clientMutationId: clientMutationId,
-          issueId: issueId
-        };
-}
-
-function makeVariables(input) {
-  return {
-          input: input
-        };
-}
-
-function make_response_closeIssue_issue(param) {
-  
-}
-
-function make_response_closeIssue(issue, param) {
-  return {
-          issue: issue
-        };
-}
-
-function makeOptimisticResponse(closeIssue, param) {
-  return {
-          closeIssue: closeIssue
-        };
-}
-
-var Utils = {
-  make_closeIssueInput: make_closeIssueInput,
-  makeVariables: makeVariables,
-  make_response_closeIssue_issue: make_response_closeIssue_issue,
-  make_response_closeIssue: make_response_closeIssue,
-  makeOptimisticResponse: makeOptimisticResponse
-};
+var Utils = {};
 
 var node = ((function(){
 var v0 = [

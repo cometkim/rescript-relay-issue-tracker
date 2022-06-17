@@ -26,6 +26,7 @@
     "@rescript/react",
     "@ryyppy/rescript-promise",
     "rescript-relay",
+    "rescript-relay-router",
     "rescript-webapi"
   ],
   "bs-dev-dependencies": [

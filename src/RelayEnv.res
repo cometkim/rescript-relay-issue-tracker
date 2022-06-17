@@ -27,11 +27,11 @@ let fetchQuery: RescriptRelay.Network.fetchFunctionPromise = (
       }),
       (),
     ),
-  ) |> Js.Promise.then_(resp =>
+  )->Promise.then(resp =>
     if Response.ok(resp) {
       Response.json(resp)
     } else {
-      Js.Promise.reject(Graphql_error("Request failed: " ++ Response.statusText(resp)))
+      Promise.reject(Graphql_error("Request failed: " ++ Response.statusText(resp)))
     }
   )
 }

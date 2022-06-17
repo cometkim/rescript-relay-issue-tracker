@@ -4,25 +4,28 @@ import * as RescriptRelay from "rescript-relay/src/RescriptRelay.bs.js";
 
 var Types = {};
 
-var wrapResponseConverter = {"__root":{"reopenIssue":{"n":""},"reopenIssue_issue":{"f":"","n":""}}};
-
-function convertWrapResponse(v) {
-  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
-}
-
-var responseConverter = {"__root":{"reopenIssue":{"n":""},"reopenIssue_issue":{"f":"","n":""}}};
-
-function convertResponse(v) {
-  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
-}
-
-var variablesConverter = {"__root":{"input":{"r":"ReopenIssueInput"}},"ReopenIssueInput":{"clientMutationId":{"n":""}}};
+var variablesConverter = {"reopenIssueInput":{},"__root":{"input":{"r":"reopenIssueInput"}}};
 
 function convertVariables(v) {
   return RescriptRelay.convertObj(v, variablesConverter, undefined, undefined);
 }
 
+var wrapResponseConverter = {"__root":{"reopenIssue_issue":{"f":""}}};
+
+function convertWrapResponse(v) {
+  return RescriptRelay.convertObj(v, wrapResponseConverter, undefined, null);
+}
+
+var responseConverter = {"__root":{"reopenIssue_issue":{"f":""}}};
+
+function convertResponse(v) {
+  return RescriptRelay.convertObj(v, responseConverter, undefined, undefined);
+}
+
 var Internal = {
+  variablesConverter: variablesConverter,
+  variablesConverterMap: undefined,
+  convertVariables: convertVariables,
   wrapResponseConverter: wrapResponseConverter,
   wrapResponseConverterMap: undefined,
   convertWrapResponse: convertWrapResponse,
@@ -30,48 +33,10 @@ var Internal = {
   responseConverterMap: undefined,
   convertResponse: convertResponse,
   convertWrapRawResponse: convertWrapResponse,
-  convertRawResponse: convertResponse,
-  variablesConverter: variablesConverter,
-  variablesConverterMap: undefined,
-  convertVariables: convertVariables
+  convertRawResponse: convertResponse
 };
 
-function make_reopenIssueInput(clientMutationId, issueId, param) {
-  return {
-          clientMutationId: clientMutationId,
-          issueId: issueId
-        };
-}
-
-function makeVariables(input) {
-  return {
-          input: input
-        };
-}
-
-function make_response_reopenIssue_issue(param) {
-  
-}
-
-function make_response_reopenIssue(issue, param) {
-  return {
-          issue: issue
-        };
-}
-
-function makeOptimisticResponse(reopenIssue, param) {
-  return {
-          reopenIssue: reopenIssue
-        };
-}
-
-var Utils = {
-  make_reopenIssueInput: make_reopenIssueInput,
-  makeVariables: makeVariables,
-  make_response_reopenIssue_issue: make_response_reopenIssue_issue,
-  make_response_reopenIssue: make_response_reopenIssue,
-  makeOptimisticResponse: makeOptimisticResponse
-};
+var Utils = {};
 
 var node = ((function(){
 var v0 = [

@@ -1,57 +1,92 @@
+/* @sourceLoc IssueDetailComments.res */
 /* @generated */
 %%raw("/* @generated */")
 module Types = {
   @@ocaml.warning("-30")
 
-  type rec response_node = {fragmentRefs: RescriptRelay.fragmentRefs<[#IssueDetailComments_issue]>}
-  type response = {node: option<response_node>}
+  @live
+  type rec response_node = {
+    @live __typename: string,
+    fragmentRefs: RescriptRelay.fragmentRefs<[ | #IssueDetailComments_issue]>,
+  }
+  @live
+  type response = {
+    node: option<response_node>,
+  }
+  @live
   type rawResponse = response
-  type refetchVariables = {
-    count: option<int>,
-    cursor: option<string>,
-    id: option<string>,
-  }
-  let makeRefetchVariables = (~count=?, ~cursor=?, ~id=?, ()): refetchVariables => {
-    count: count,
-    cursor: cursor,
-    id: id,
-  }
-
+  @live
   type variables = {
     count: option<int>,
     cursor: option<string>,
-    id: string,
+    @live id: string,
   }
+  @live
+  type refetchVariables = {
+    count: option<option<int>>,
+    cursor: option<option<string>>,
+    @live id: option<string>,
+  }
+  @live let makeRefetchVariables = (
+    ~count=?,
+    ~cursor=?,
+    ~id=?,
+    ()
+  ): refetchVariables => {
+    count: count,
+    cursor: cursor,
+    id: id
+  }
+
 }
 
 module Internal = {
+  @live
+  let variablesConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{}`
+  )
+  @live
+  let variablesConverterMap = ()
+  @live
+  let convertVariables = v => v->RescriptRelay.convertObj(
+    variablesConverter,
+    variablesConverterMap,
+    Js.undefined
+  )
+  @live
   type wrapResponseRaw
-  let wrapResponseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"node":{"f":"","n":""}}}`)
-
+  @live
+  let wrapResponseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"__root":{"node":{"f":""}}}`
+  )
+  @live
   let wrapResponseConverterMap = ()
-  let convertWrapResponse = v =>
-    v->RescriptRelay.convertObj(wrapResponseConverter, wrapResponseConverterMap, Js.null)
+  @live
+  let convertWrapResponse = v => v->RescriptRelay.convertObj(
+    wrapResponseConverter,
+    wrapResponseConverterMap,
+    Js.null
+  )
+  @live
   type responseRaw
-  let responseConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"node":{"f":"","n":""}}}`)
-
+  @live
+  let responseConverter: Js.Dict.t<Js.Dict.t<Js.Dict.t<string>>> = %raw(
+    json`{"__root":{"node":{"f":""}}}`
+  )
+  @live
   let responseConverterMap = ()
-  let convertResponse = v =>
-    v->RescriptRelay.convertObj(responseConverter, responseConverterMap, Js.undefined)
+  @live
+  let convertResponse = v => v->RescriptRelay.convertObj(
+    responseConverter,
+    responseConverterMap,
+    Js.undefined
+  )
   type wrapRawResponseRaw = wrapResponseRaw
+  @live
   let convertWrapRawResponse = convertWrapResponse
   type rawResponseRaw = responseRaw
+  @live
   let convertRawResponse = convertResponse
-  let variablesConverter: Js.Dict.t<
-    Js.Dict.t<Js.Dict.t<string>>,
-  > = %raw(json`{"__root":{"cursor":{"n":""},"count":{"n":""}}}`)
-
-  let variablesConverterMap = ()
-  let convertVariables = v =>
-    v->RescriptRelay.convertObj(variablesConverter, variablesConverterMap, Js.undefined)
 }
 
 type queryRef
@@ -59,14 +94,19 @@ type queryRef
 module Utils = {
   @@ocaml.warning("-33")
   open Types
-  let makeVariables = (~count=?, ~cursor=?, ~id, ()): variables => {
-    count: count,
-    cursor: cursor,
-    id: id,
-  }
+  @live @obj external makeVariables: (
+    ~count: int=?,
+    ~cursor: string=?,
+    ~id: string,
+    unit
+  ) => variables = ""
+
+
 }
+
 type relayOperationNode
 type operationType = RescriptRelay.queryNode<relayOperationNode>
+
 
 let node: operationType = %raw(json` (function(){
 var v0 = [
@@ -134,6 +174,7 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
+          (v2/*: any*/),
           {
             "args": [
               {
@@ -315,21 +356,21 @@ return {
     ]
   },
   "params": {
-    "cacheID": "363fb0118977147c40240cb79e866909",
+    "cacheID": "b751b7b661e81c165b5560c0b4da7714",
     "id": null,
     "metadata": {},
     "name": "IssueDetailCommentsQuery",
     "operationKind": "query",
-    "text": "query IssueDetailCommentsQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...IssueDetailComments_issue_1G22uz\n    id\n  }\n}\n\nfragment IssueDetailComments_issue_1G22uz on Issue {\n  comments(after: $cursor, first: $count) {\n    edges {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        body\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query IssueDetailCommentsQuery(\n  $count: Int = 10\n  $cursor: String\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...IssueDetailComments_issue_1G22uz\n    id\n  }\n}\n\nfragment IssueDetailComments_issue_1G22uz on Issue {\n  comments(after: $cursor, first: $count) {\n    edges {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __typename\n            __isNode: __typename\n            id\n          }\n        }\n        body\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
   }
 };
 })() `)
 
 include RescriptRelay.MakeLoadQuery({
-  type variables = Types.variables
-  type loadedQueryRef = queryRef
-  type response = Types.response
-  type node = relayOperationNode
-  let query = node
-  let convertVariables = Internal.convertVariables
-})
+    type variables = Types.variables
+    type loadedQueryRef = queryRef
+    type response = Types.response
+    type node = relayOperationNode
+    let query = node
+    let convertVariables = Internal.convertVariables
+});
