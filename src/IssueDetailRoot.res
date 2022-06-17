@@ -52,12 +52,9 @@ let make = (~queryRef) => {
           <div className="issue-comment-author-name"> {React.string(author.login)} </div>
           <div className="issue-comment-body">
             <ReactMarkdown
-              components={ReactMarkdown.makeCustomComponentMap(
-                ~image=(~src, ~alt, ~className, ()) => {
-                  <SuspenseImage src alt className />
-                },
-                (),
-              )}>
+              components={ReactMarkdown.makeCustomComponentMap(~image=(~src, ~alt, ~className) => {
+                <SuspenseImage src ?alt ?className />
+              }, ())}>
               {issue.body}
             </ReactMarkdown>
           </div>

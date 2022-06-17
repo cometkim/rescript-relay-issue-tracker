@@ -201,12 +201,17 @@ function IssueDetailComments(Props) {
                                                 }, author.login), React.createElement("div", {
                                                   className: "issue-comment-body"
                                                 }, React.createElement(ReactMarkdown$1, ReactMarkdown.makeProps(comment.body, {
-                                                          image: (function (src, alt, className, param) {
-                                                              return React.createElement(SuspenseImage.make, {
-                                                                          src: src,
-                                                                          alt: alt,
-                                                                          className: className
-                                                                        });
+                                                          image: (function (src, alt, className) {
+                                                              var tmp = {
+                                                                src: src
+                                                              };
+                                                              if (alt !== undefined) {
+                                                                tmp.alt = alt;
+                                                              }
+                                                              if (className !== undefined) {
+                                                                tmp.className = className;
+                                                              }
+                                                              return React.createElement(SuspenseImage.make, tmp);
                                                             })
                                                         }, undefined)))),
                                         fallback: null,

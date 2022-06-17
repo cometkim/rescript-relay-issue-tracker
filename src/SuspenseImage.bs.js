@@ -1,9 +1,9 @@
 
 
 import * as React from "react";
+import * as $$Promise from "@ryyppy/rescript-promise/src/Promise.bs.js";
+import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Belt_HashMapString from "rescript/lib/es6/belt_HashMapString.js";
-
-var $$Image = {};
 
 function make(param) {
   return Belt_HashMapString.make(100);
@@ -38,46 +38,44 @@ function read(cache, src) {
       status: /* Pending */0,
       value: thenable
     };
-    thenable.then(function (src) {
+    $$Promise.$$catch(thenable.then(function (src) {
+              record$1.status = {
+                TAG: /* Resolved */0,
+                _0: src
+              };
+              return Promise.resolve(src);
+            }), (function (error) {
             record$1.status = {
-              TAG: /* Resolved */0,
-              _0: src
+              TAG: /* Rejected */1,
+              _0: error
             };
             return Promise.resolve(src);
-          }).catch(function (error) {
-          record$1.status = {
-            TAG: /* Rejected */1,
-            _0: error
-          };
-          return Promise.resolve(src);
-        });
+          }));
     Belt_HashMapString.set(cache, src, record$1);
     return ;
   }
 }
-
-var ImageCache = {
-  make: make,
-  read: read
-};
 
 function SuspenseImage(Props) {
   var src = Props.src;
   var alt = Props.alt;
   var className = Props.className;
   read(React.unstable_getCacheForType(make), src);
-  return React.createElement("img", {
-              className: className,
-              alt: alt,
-              src: src
-            });
+  var tmp = {
+    src: src
+  };
+  if (className !== undefined) {
+    tmp.className = Caml_option.valFromOption(className);
+  }
+  if (alt !== undefined) {
+    tmp.alt = Caml_option.valFromOption(alt);
+  }
+  return React.createElement("img", tmp);
 }
 
 var make$1 = SuspenseImage;
 
 export {
-  $$Image ,
-  ImageCache ,
   make$1 as make,
   
 }

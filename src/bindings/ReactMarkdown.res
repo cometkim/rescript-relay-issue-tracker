@@ -1,6 +1,10 @@
 type customComponentMap
 
-type imageComponent = (~src: string, ~alt: string, ~className: string, unit) => React.element
+type imageComponent = (
+  ~src: string,
+  ~alt: option<string>,
+  ~className: option<string>,
+) => React.element
 
 @obj
 external makeCustomComponentMap: (~image: imageComponent=?, unit) => customComponentMap = ""

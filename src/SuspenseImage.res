@@ -16,28 +16,35 @@ module ImageCache = {
   type status =
     | Pending
     | Resolved(string)
-    | Rejected(Js.Promise.error)
+    | Rejected(exn)
 
   type record = {
     mutable status: status,
-    value: Js.Promise.t<string>,
+    value: Promise.t<string>,
   }
 
-  type t = Belt.HashMap.String.t<record>
+  module Cache = {
+    type t = Belt.HashMap.String.t<record>
 
-  let make = () => {
-    Belt.HashMap.String.make(~hintSize=100)
+    let make = () => {
+      Belt.HashMap.String.make(~hintSize=100)
+    }
   }
 
   @module("react")
-  external getOrMake: (~make: unit => t) => t = "unstable_getCacheForType"
+  external getCacheForType: (~make: unit => Cache.t) => Cache.t = "unstable_getCacheForType"
+
+  @inline
+  let getCache = () => {
+    getCacheForType(~make=Cache.make)
+  }
 
   let read = (cache, src) => {
     let record = cache->Belt.HashMap.String.get(src)
 
     switch record {
     | None => {
-        let thenable = Js.Promise.make((~resolve, ~reject) => {
+        let thenable = Promise.make((resolve, reject) => {
           let image = Image.make()
           image->Image.setOnLoad(_ => resolve(. src))
           image->Image.setOnError(exn => reject(. exn))
@@ -50,15 +57,15 @@ module ImageCache = {
         }
 
         thenable
-        |> Js.Promise.then_(src => {
+        ->Promise.then(src => {
           record.status = Resolved(src)
-          Js.Promise.resolve(src)
+          Promise.resolve(src)
         })
-        |> Js.Promise.catch(error => {
+        ->Promise.catch(error => {
           record.status = Rejected(error)
-          Js.Promise.resolve(src)
+          Promise.resolve(src)
         })
-        |> ignore
+        ->ignore
 
         cache->Belt.HashMap.String.set(src, record)->ignore
       }
@@ -73,11 +80,7 @@ module ImageCache = {
 }
 
 @react.component
-let make = (~src, ~alt, ~className) => {
-  {
-    open ImageCache
-    getOrMake(~make)->read(src)
-  }
-
-  <img src alt className />
+let make = (~src, ~alt=?, ~className=?) => {
+  ImageCache.getCache()->ImageCache.read(src)
+  <img src ?alt ?className />
 }

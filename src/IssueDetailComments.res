@@ -65,8 +65,8 @@ let make = (~issue) => {
                   <div className="issue-comment-body">
                     <ReactMarkdown
                       components={ReactMarkdown.makeCustomComponentMap(
-                        ~image=(~src, ~alt, ~className, ()) => {
-                          <SuspenseImage src alt className />
+                        ~image=(~src, ~alt, ~className) => {
+                          <SuspenseImage src ?alt ?className />
                         },
                         (),
                       )}>
